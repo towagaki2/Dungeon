@@ -9,7 +9,6 @@ Player::Player()
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
 
-
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/walk.tka");
 	m_animationClips[0].SetLoopFlag(true);

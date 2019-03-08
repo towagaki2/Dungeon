@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Phase.h"
-
+#include "Enemy.h"
+#include "Player.h"
 
 Phase::Phase()
 {

@@ -1,7 +1,5 @@
 #pragma once
 
-class Game;
-
 //ƒ^[ƒ“ŠÇ—B
 class Phase
 {

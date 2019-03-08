@@ -20,13 +20,31 @@ public:
 	{
 		return m_rotation;
 	}
-
+	//プレイヤーの移動のフラグ
+	int GetPlmoveF()
+	{
+		return moveF;
+	}
+	//プレイヤーの攻撃のフラグ
+	int GetPlatttackF()
+	{
+		return atttackF;
+	}
+	//プレイヤーの待機のフラグ
+	int GetPlstandF()
+	{
+		return standF;
+	}
 
 private:
 	void Move();		//移動処理。
 	void Turn();		//回転処理　
 
 	Phase phase;			//ターン制御
+
+	int moveF = 0;			//移動フラグ。	
+	int atttackF = 0;		//攻撃フラグ。
+	int standF = 0;			//待機フラグ。
 	
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。

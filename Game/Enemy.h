@@ -18,6 +18,21 @@ public:
 	{
 		return m_rotation;
 	}
+	//エネミーの移動のフラグ
+	int GetEnemoveF()
+	{
+		return moveF;
+	}
+	//エネミーの攻撃のフラグ
+	int GetEneatttackF()
+	{
+		return atttackF;
+	}
+	//エネミーの待機のフラグ
+	int GetEnestandF()
+	{
+		return standF;
+	}
 
 private:
 	void Move();		//移動処理。
@@ -25,6 +40,10 @@ private:
 
 	Phase phase;			//ターン制御。
 	CharaMove enemyMove;		//移動制御。
+
+	int moveF = 0;			//移動フラグ。	
+	int atttackF = 0;		//攻撃フラグ。
+	int standF = 0;			//待機フラグ。
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
