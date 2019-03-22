@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CharaMove.h"
-
+#include "Game.h"
 
 
 CharaMove::CharaMove()
@@ -15,7 +15,7 @@ CharaMove::~CharaMove()
 CVector3 CharaMove::EneMove()
 {
 	m_moveSpeed = CVector3::Zero();
-	if (phase.GetTaan() == 1) {
+	if (Game::GetGame().GetPhase()->GetTaan() == 1) {
 		m_moveSpeed = CVector3::AxisX();
 		timerX++;
 		if (randomX == 1 || randomX == 5 || randomX == 9) {

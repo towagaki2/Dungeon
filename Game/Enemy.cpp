@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "Enemy.h"
-
+#include "Game.h"
 
 
 Enemy::Enemy()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
-
 
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/walk.tka");
@@ -23,7 +22,6 @@ Enemy::Enemy()
 		2					//アニメーションクリップの数。
 	);
 
-	m_position.y = 0.0f;	
 	m_charaCon.Init(25.0f, 50.0f, m_position); 
 	enemyMove.Getpos(m_position);
 	m_position = { 10.0f,0.0f,0.0f };
@@ -35,13 +33,21 @@ Enemy::~Enemy()
 
 void Enemy::Move()
 {
+	//移動処理。
 	enemyMove.Getpos(m_position);
-	if (phase.GetTaan() == 0) {
-		m_moveSpeed = enemyMove.EneMove();
-		m_moveSpeed *= 100.0f;
-		m_position += m_moveSpeed;
-	}
+	m_moveSpeed = enemyMove.EneMove();
+	m_moveSpeed *= 100.0f;
+	m_position += m_moveSpeed;
 	m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
+	//攻撃処理。
+
+	if (moveF == 1 || attackF == 1 || standF == 1)
+	{
+		summaryF = 1;
+		moveF = 0;
+		attackF = 0;
+		standF = 0;
+	}
 }
 
 void Enemy::Turn()

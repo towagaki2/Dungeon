@@ -28,8 +28,7 @@ void Game::Update()
 	enemy.Update();
 	//バックグランドの更新。
 	background.Update();
-	//ターンの更新。
-	phase.Update();
+	
 }
 
 void Game::Draw()
@@ -40,4 +39,6 @@ void Game::Draw()
 	enemy.Draw();
 	//バックグランドの描画。
 	background.Draw();
+	//ターンの更新。
+	phase.Update();
 }

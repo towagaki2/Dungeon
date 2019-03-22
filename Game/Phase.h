@@ -19,6 +19,7 @@ public:
 	};
 	enum Taan mati = plTaan;
 private:
+	
 
 	int taan = 0;
 };

@@ -1,6 +1,5 @@
 #pragma once
 #include "character/CharacterController.h"
-#include "Phase.h"
 #include "CharaMove.h"
 class Enemy
 {
@@ -18,32 +17,22 @@ public:
 	{
 		return m_rotation;
 	}
-	//エネミーの移動のフラグ
-	int GetEnemoveF()
+	//エネミーのターンフラグ。
+	int GetEneSummaryF()
 	{
-		return moveF;
-	}
-	//エネミーの攻撃のフラグ
-	int GetEneatttackF()
-	{
-		return atttackF;
-	}
-	//エネミーの待機のフラグ
-	int GetEnestandF()
-	{
-		return standF;
+		return summaryF;
 	}
 
 private:
 	void Move();		//移動処理。
 	void Turn();		//回転処理　
 
-	Phase phase;			//ターン制御。
 	CharaMove enemyMove;		//移動制御。
 
 	int moveF = 0;			//移動フラグ。	
-	int atttackF = 0;		//攻撃フラグ。
+	int attackF = 0;		//攻撃フラグ。
 	int standF = 0;			//待機フラグ。
+	int summaryF = 0;			//フラグの総括。
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。

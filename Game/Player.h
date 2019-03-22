@@ -1,8 +1,6 @@
 #pragma once
 #include "character/CharacterController.h"
-#include "Phase.h"
 
-class Phase;
 
 class Player
 {
@@ -11,7 +9,6 @@ public:
 	~Player();
 	void Update();
 	void Draw();
-	
 	CVector3 GetPosition()
 	{
 		return m_position;
@@ -20,31 +17,22 @@ public:
 	{
 		return m_rotation;
 	}
-	//プレイヤーの移動のフラグ
-	int GetPlmoveF()
+	//プレイヤーのターンフラグ。
+	int GetPlSummaryF()
 	{
-		return moveF;
-	}
-	//プレイヤーの攻撃のフラグ
-	int GetPlatttackF()
-	{
-		return atttackF;
-	}
-	//プレイヤーの待機のフラグ
-	int GetPlstandF()
-	{
-		return standF;
+		return summaryF;
 	}
 
 private:
 	void Move();		//移動処理。
 	void Turn();		//回転処理　
 
-	Phase phase;			//ターン制御
+
 
 	int moveF = 0;			//移動フラグ。	
-	int atttackF = 0;		//攻撃フラグ。
+	int attackF = 0;		//攻撃フラグ。
 	int standF = 0;			//待機フラグ。
+	int summaryF = 0;		//フラグの総括。
 	
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
