@@ -24,29 +24,48 @@ Enemy::Enemy()
 
 	m_charaCon.Init(25.0f, 50.0f, m_position); 
 	enemyMove.Getpos(m_position);
-	m_position = { 10.0f,0.0f,0.0f };
+	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::Move()
+void Enemy::EnStatus()
 {
-	//移動処理。
-	enemyMove.Getpos(m_position);
-	m_moveSpeed = enemyMove.EneMove();
-	m_moveSpeed *= 100.0f;
-	m_position += m_moveSpeed;
-	m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
-	//攻撃処理。
 
-	if (moveF == 1 || attackF == 1 || standF == 1)
-	{
-		summaryF = 1;
-		moveF = 0;
-		attackF = 0;
-		standF = 0;
+}
+
+void Enemy::Move()
+{		
+	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) {
+		FrameCounter++;
+		if (FrameCounter > 15) {
+			//特殊処理
+
+
+			//移動処理
+			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
+			if (m_Length > move.Length())
+			{
+				//攻撃処理
+				attackF = 1;
+			}
+			else {
+				m_moveSpeed = enemyMove.EneMove();
+				m_moveSpeed *= 1000.0f;
+				m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
+				moveF = 1;
+			}
+			if (moveF == 1 || attackF == 1 || standF == 1)
+			{
+				summaryF = 1;
+				moveF = 0;
+				attackF = 0;
+				standF = 0;
+				FrameCounter = 0;
+			}
+		}
 	}
 }
 
@@ -57,15 +76,14 @@ void Enemy::Turn()
 
 void Enemy::Update()
 {
-
-	//移動処理。
-	Move();
-	//回転処理
-	Turn();
-
+		//移動処理。
+		Move();
+		//回転処理
+		Turn();
+	
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-
+	
 }
 
 void Enemy::Draw()

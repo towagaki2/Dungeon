@@ -26,6 +26,7 @@ Player::Player()
 	m_position.y = 0.0f;
 	m_charaCon.Init(10.0f, 50.0f, m_position);
 
+
 }
 
 
@@ -33,13 +34,18 @@ Player::~Player()
 {
 }
 
+void Player::PlStatus()
+{
+	HP;
+	HUN;
+}
+
 void Player::Move()
 {
-	
-	if (Game::GetGame().GetPhase()->GetTaan() == 0) {
+
+	if (Game::GetGame().GetPhase()->GetTaan() == Phase::plTaan) {
+
 		//移動処理。
-	/*	float lStickXF = g_pad[0].GetLStickXF();
-		float lStickYF = g_pad[0].GetLStickYF();*/
 		float XF = 0;
 		float ZF = 0;
 		if (g_pad[0].IsTrigger(enButtonUp))
@@ -47,40 +53,34 @@ void Player::Move()
 			ZF = 1;
 			moveF = 1;
 		}
-		else if (g_pad[0].IsTrigger(enButtonDown))
+		if (g_pad[0].IsTrigger(enButtonDown))
 		{
 			ZF = -1;
 			moveF = 1;
-		}
-		else
-		{
-			ZF = 0;
 		}
 		if (g_pad[0].IsTrigger(enButtonLeft))
 		{
 			XF = -1;
 			moveF = 1;
 		}
-		else if (g_pad[0].IsTrigger(enButtonRight))
+		if (g_pad[0].IsTrigger(enButtonRight))
 		{
 			XF = 1;
 			moveF = 1;
 		}
-		else
-		{
-			XF = 0;
-		}
-		//m_moveSpeed.z = lStickYF * 1000.0f;	//縦方向への移動速度を代入。
-		//m_moveSpeed.x = lStickXF * 1000.0f;		//横方向への移動速度を代入。
 		m_moveSpeed.z = ZF * 1000.0f;
 		m_moveSpeed.x = XF * 1000.0f;
 		m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
 
-		m_moveSpeed.y -= 980.0f * (1.0f / 60.0f);
+		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
+			if (m_Length > enpo.Length())
+			{
+
+			}
 			attackF = 1;
 		}
 		//待機処理。
@@ -90,11 +90,12 @@ void Player::Move()
 		}
 		if (moveF == 1 || attackF == 1 || standF == 1)
 		{
-		summaryF = 1;
-		moveF = 0;
-		attackF = 0;
-		standF = 0;
+			summaryF = 1;
+			moveF = 0;
+			attackF = 0;
+			standF = 0;
 		}
+		
 	}
 
 	CVector3 cameraForward = g_camera3D.GetForward();
@@ -110,10 +111,10 @@ void Player::Turn()
 {
 
 }
-
 void Player::Update()
 {
-	
+	//ステータス処理。
+	PlStatus();
 	//移動処理。
 	Move();
 	//回転処理

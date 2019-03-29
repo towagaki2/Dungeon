@@ -19,15 +19,16 @@ void Phase::Update()
 	case plTaan:
 		if (Game::GetGame().GetPlayer()->GetPlSummaryF()==1)
 		{
-			taan = 1;
 			mati = enTaan;
+			Game::GetGame().GetEnemy()->SetEneSummaryF(0);
+			Game::GetGame().GetPlayer()->SetHUN(-1);
 		}
 		break;
 	case enTaan:
 		if (Game::GetGame().GetEnemy()->GetEneSummaryF()==1)
 		{
-			taan = 0;
 			mati = plTaan;
+			Game::GetGame().GetPlayer()->SetPlSummaryF(0);
 		}
 		break;
 	}

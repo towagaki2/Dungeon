@@ -33,6 +33,7 @@ class Game
 	protected:
 		Game();
 	private:
+		CVector3 PlayerPos;
 		//プレイヤー。
 		Player player;
 		//エネミー。

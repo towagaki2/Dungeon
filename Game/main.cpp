@@ -19,14 +19,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetTarget({0.0f,0.0f,0.0f});
 	g_camera3D.SetFar(10000.0f);
 
-	CVector3 PlayerPos;
+
 	//ƒQ[ƒ€ƒ‹[ƒvB
 	while (DispatchWindowMessage() == true)
 	{
-		PlayerPos = Game::GetGame().GetPlayer()->GetPosition();
-		g_camera3D.SetPosition({ PlayerPos.x+10.0f,800.0f, PlayerPos.z+10.0f });
-
-		g_camera3D.SetTarget({ PlayerPos.x + 10.0f,0.0f, PlayerPos.z+10.1f});
+		
 		//•`‰æŠJnB
 		g_graphicsEngine->BegineRender();
 		
@@ -34,7 +31,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		Game::GetGame().Update();
 		//ƒQ[ƒ€‚Ì•`‰æB
 		Game::GetGame().Draw();
-
 
 		//•`‰æI—¹B
 		g_graphicsEngine->EndRender();

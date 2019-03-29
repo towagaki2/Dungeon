@@ -4,23 +4,22 @@
 class Phase
 {
 public:
+	enum Taan
+	{
+		plTaan,			//プレイヤーのターン。
+		enTaan,			//エネミーのターン。
+	};
+
 	Phase();
 	~Phase(); 
 	void Update();
-	int GetTaan()
+	Taan GetTaan()
 	{
-		return taan;
+		return mati;
 	}
 
-	enum Taan
-	{
-		plTaan,
-		enTaan,
-	};
-	enum Taan mati = plTaan;
 private:
-	
-
-	int taan = 0;
+	Taan mati = plTaan;
+	int PlHun=0;
 };
 
