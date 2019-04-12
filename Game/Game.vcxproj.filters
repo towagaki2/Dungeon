@@ -203,6 +203,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="CharaMove.h" />
+    <ClInclude Include="GameDefine.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

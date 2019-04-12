@@ -10,6 +10,7 @@ public:
 	void PlStatus();
 	void Update();
 	void Draw();
+	//プレイヤーのポジションと向きのゲッター。
 	CVector3 GetPosition()
 	{
 		return m_position;
@@ -47,6 +48,7 @@ private:
 	int standF = 0;			//待機フラグ。
 	int summaryF = 0;		//フラグの総括。
 	
+
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
 	AnimationClip m_animationClips[2];					//アニメーションクリップ。

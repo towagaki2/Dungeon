@@ -23,7 +23,6 @@ Enemy::Enemy()
 	);
 
 	m_charaCon.Init(25.0f, 50.0f, m_position); 
-	enemyMove.Getpos(m_position);
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 }
 
@@ -38,7 +37,7 @@ void Enemy::EnStatus()
 
 void Enemy::Move()
 {		
-	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) {
+	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) { 
 		FrameCounter++;
 		if (FrameCounter > 15) {
 			//ì¡éÍèàóù
@@ -46,15 +45,15 @@ void Enemy::Move()
 
 			//à⁄ìÆèàóù
 			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
-			if (m_Length > move.Length())
+			if (masu*1.3> move.Length())
 			{
 				//çUåÇèàóù
 				attackF = 1;
 			}
-			else {
-				m_moveSpeed = enemyMove.EneMove();
-				m_moveSpeed *= 1000.0f;
-				m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
+			{
+				m_moveSpeed = enemyMove.EneMove(m_position);
+				m_moveSpeed *= masu;
+				m_position += m_moveSpeed;
 				moveF = 1;
 			}
 			if (moveF == 1 || attackF == 1 || standF == 1)

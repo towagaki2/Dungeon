@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Game.h"
+#include"GameDefine.h"
 
 
 Player::Player()
@@ -11,7 +12,7 @@ Player::Player()
 
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/walk.tka");
-	m_animationClips[0].SetLoopFlag(true);
+	m_animationClips[0].SetLoopFlag(false);
 
 	m_animationClips[1].Load(L"Assets/animData/run.tka");
 	m_animationClips[1].SetLoopFlag(true);
@@ -22,7 +23,7 @@ Player::Player()
 		m_animationClips,	//アニメーションクリップの配列。
 		2					//アニメーションクリップの数。
 	);
-
+	
 	m_position.y = 0.0f;
 	m_charaCon.Init(10.0f, 50.0f, m_position);
 
@@ -68,32 +69,43 @@ void Player::Move()
 			XF = 1;
 			moveF = 1;
 		}
-		m_moveSpeed.z = ZF * 1000.0f;
-		m_moveSpeed.x = XF * 1000.0f;
-		m_position = m_charaCon.Execute(1.0f / 30.0f, m_moveSpeed);
+		m_moveSpeed.z = ZF * masu;
+		m_moveSpeed.x = XF * masu;
+		m_position += m_moveSpeed;
 
 		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
-			if (m_Length > enpo.Length())
+			if (masu*1.3 > enpo.Length())
 			{
-
+attackF = 1;
 			}
-			attackF = 1;
+			
 		}
 		//待機処理。
 		if (g_pad[0].IsTrigger(enButtonX))
 		{
 			standF = 1;
 		}
+		if (moveF == 1)
+		{
+			m_animation.Play(0);
+		}
+		else
+		{
+			m_animation.Play(1);
+		}
 		if (moveF == 1 || attackF == 1 || standF == 1)
 		{
+			if (!m_animation.IsPlaying()) 
+			{
 			summaryF = 1;
 			moveF = 0;
 			attackF = 0;
 			standF = 0;
+			}
 		}
 		
 	}
@@ -119,8 +131,10 @@ void Player::Update()
 	Move();
 	//回転処理
 	Turn();
-
+	//アニメーションの更新。
+	m_animation.Update(1.0f/30.0f);
 	//ワールド行列の更新。
+	m_rotation.SetRotationDeg(CVector3::AxisX(), 90.0f);
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 
 }

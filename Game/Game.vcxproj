@@ -141,6 +141,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="CharaMove.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameDefine.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
