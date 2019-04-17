@@ -6,7 +6,7 @@
 Enemy::Enemy()
 {
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
+	m_model.Init(L"Assets/modelData/Skeleton@Skin.cmo");
 
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/walk.tka");
@@ -32,7 +32,7 @@ Enemy::~Enemy()
 
 void Enemy::EnStatus()
 {
-
+	enHP;
 }
 
 void Enemy::Move()
@@ -43,13 +43,14 @@ void Enemy::Move()
 			//特殊処理
 
 
-			//移動処理
 			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
-			if (masu*1.3> move.Length())
-			{
 				//攻撃処理
+			if (masu*1.3 > move.Length())
+			{
+				Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
 				attackF = 1;
 			}
+			//移動処理
 			{
 				m_moveSpeed = enemyMove.EneMove(m_position);
 				m_moveSpeed *= masu;
@@ -75,13 +76,15 @@ void Enemy::Turn()
 
 void Enemy::Update()
 {
+		//エネミーのステータス処理。
+		EnStatus();
 		//移動処理。
 		Move();
 		//回転処理
 		Turn();
 	
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 8);
 	
 }
 

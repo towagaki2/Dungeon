@@ -18,14 +18,17 @@ class Game
 			static Game s_pGame;
 			return s_pGame;
 		}
+		//プレイヤーのゲッター。
 		Player* GetPlayer()
 		{
 			return &player;
 		}
+		//エネミーのゲッター。
 		Enemy* GetEnemy()
 		{
 			return &enemy;
 		}
+		//ターンのゲッター。
 		Phase* GetPhase()
 		{
 			return &phase;

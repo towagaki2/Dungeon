@@ -26,7 +26,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		
 		//描画開始。
 		g_graphicsEngine->BegineRender();
-		
 		//ゲームの更新。
 		Game::GetGame().Update();
 		//ゲームの描画。

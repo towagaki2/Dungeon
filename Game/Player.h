@@ -10,6 +10,19 @@ public:
 	void PlStatus();
 	void Update();
 	void Draw();
+	//プレイヤーのステータスのゲッターセッター。
+	int GetplHP()
+	{
+		return plHP;
+	}
+	void SetplHP(int plplHP)
+	{
+		plHP += plplHP;
+	}
+	int GetplDEF()
+	{
+		return plDEF;
+	}
 	//プレイヤーのポジションと向きのゲッター。
 	CVector3 GetPosition()
 	{
@@ -36,9 +49,9 @@ public:
 
 private:
 	
-	int HP = 10;		//ヒットポイント。
-	int ATK = 10;		//攻撃力。
-	int DEF = 5;		//防御力。
+	int plHP = 10;		//ヒットポイント。
+	int plATK = 10;		//攻撃力。
+	int plDEF = 5;		//防御力。
 	int HUN = 100;		//満腹度。
 	void Move();		//移動処理。
 	void Turn();		//回転処理。　
@@ -55,7 +68,6 @@ private:
 	CVector3 m_position = CVector3::Zero();				//座標。
 	CVector3 m_scale = CVector3::One();					//拡大率。
 	CVector3 m_moveSpeed = CVector3::Zero();			//移動速度。
-	float m_Length = (1000.0f*(1.0f / 30.0f))*sqrt(2);	//1マスの長さ
 	CVector3 enpo;										//NPCとPlayerの距離。
 	CQuaternion m_rotation = CQuaternion::Identity();	//回転。	
 	CharacterController m_charaCon;						//キャラクターコントローラーを追加。

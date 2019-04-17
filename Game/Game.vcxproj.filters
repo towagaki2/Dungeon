@@ -113,6 +113,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Phase.cpp" />
     <ClCompile Include="CharaMove.cpp" />
+    <ClCompile Include="GameEnd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -204,12 +205,16 @@
     <ClInclude Include="Phase.h" />
     <ClInclude Include="CharaMove.h" />
     <ClInclude Include="GameDefine.h" />
+    <ClInclude Include="GameEnd.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\yuka.FBX">
+      <Filter>Assets\modelData</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
   </ItemGroup>

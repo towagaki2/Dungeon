@@ -37,8 +37,9 @@ Player::~Player()
 
 void Player::PlStatus()
 {
-	HP;
+	plHP;
 	HUN;
+
 }
 
 void Player::Move()
@@ -73,16 +74,17 @@ void Player::Move()
 		m_moveSpeed.x = XF * masu;
 		m_position += m_moveSpeed;
 
-		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
+		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);e
+
 
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
 			if (masu*1.3 > enpo.Length())
 			{
-attackF = 1;
+				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
 			}
-			
+			attackF = 1;
 		}
 		//待機処理。
 		if (g_pad[0].IsTrigger(enButtonX))
@@ -125,7 +127,7 @@ void Player::Turn()
 }
 void Player::Update()
 {
-	//ステータス処理。
+	//プレイヤーのステータス処理。
 	PlStatus();
 	//移動処理。
 	Move();
