@@ -9,17 +9,29 @@ Enemy::Enemy()
 	m_model.Init(L"Assets/modelData/Skeleton@Skin.cmo");
 
 	//tkaファイルの読み込み。
-	m_animationClips[0].Load(L"Assets/animData/walk.tka");
+	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");
 	m_animationClips[0].SetLoopFlag(true);
 
-	m_animationClips[1].Load(L"Assets/animData/run.tka");
+	m_animationClips[1].Load(L"Assets/animData/SkeletonWALK.tka");
 	m_animationClips[1].SetLoopFlag(true);
+
+	m_animationClips[2].Load(L"Assets/animData/SkeletonATK.tka");
+	m_animationClips[2].SetLoopFlag(true);
+
+	m_animationClips[3].Load(L"Assets/animData/SkeletonDEATH.tka");
+	m_animationClips[3].SetLoopFlag(true);
+
+	m_animationClips[4].Load(L"Assets/animData/SkeletonATK.tka");
+	m_animationClips[4].SetLoopFlag(true);
+
+	m_animationClips[5].Load(L"Assets/animData/SkeletonDAMAGE.tka");
+	m_animationClips[5].SetLoopFlag(true);
 	//アニメーションの初期化。
 	m_animation.Init(
 		m_model,			//アニメーションを流すスキンモデル。
 							//これでアニメーションとスキンモデルが関連付けされる。
 		m_animationClips,	//アニメーションクリップの配列。
-		2					//アニメーションクリップの数。
+		6					//アニメーションクリップの数。
 	);
 
 	m_charaCon.Init(25.0f, 50.0f, m_position); 
@@ -50,13 +62,28 @@ void Enemy::Move()
 				Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
 				attackF = 1;
 			}
-			//移動処理
+			if (attackF == 1)
+			{
+				m_animation.Play(2);
+			}
+			else
+				//移動処理
 			{
 				m_moveSpeed = enemyMove.EneMove(m_position);
 				m_moveSpeed *= masu;
 				m_position += m_moveSpeed;
 				moveF = 1;
-			}
+
+				if (moveF == 1)
+				{
+					m_animation.Play(1);
+				}
+				else
+				{
+					m_animation.Play(0);
+				}
+
+			}		
 			if (moveF == 1 || attackF == 1 || standF == 1)
 			{
 				summaryF = 1;
@@ -82,7 +109,9 @@ void Enemy::Update()
 		Move();
 		//回転処理
 		Turn();
-	
+		//アニメーションの更新。
+		m_animation.Update(1.0f / 30.0f);
+
 	//ワールド行列の更新。
 		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 8);
 	
