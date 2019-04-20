@@ -103,6 +103,7 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="CharaMove.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
@@ -135,12 +136,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="CharaMove.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameEnd.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX" />

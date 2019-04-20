@@ -1,9 +1,12 @@
 #pragma once
+class UI;
 class GameEnd
 {
 
 public:
-	GameEnd();
+	GameEnd(bool end);
 	~GameEnd();
+	void Update();
+	UI* ui;
 };
 

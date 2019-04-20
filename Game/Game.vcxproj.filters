@@ -114,6 +114,10 @@
     <ClCompile Include="Phase.cpp" />
     <ClCompile Include="CharaMove.cpp" />
     <ClCompile Include="GameEnd.cpp" />
+    <ClCompile Include="font.cpp">
+      <Filter>graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -206,6 +210,10 @@
     <ClInclude Include="CharaMove.h" />
     <ClInclude Include="GameDefine.h" />
     <ClInclude Include="GameEnd.h" />
+    <ClInclude Include="font.h">
+      <Filter>graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

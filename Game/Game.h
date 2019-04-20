@@ -4,22 +4,34 @@
 #include "Enemy.h"
 #include "level/Level.h"
 #include "BackGround.h"
+#include "GameEnd.h"
+#include "UI.h"
 class Player;
 class Phase;
 class Enemy;
+class GameEnd;
+class UI;
+
 class Game
 {
 	public:
 		~Game();
+		
 		 void Update();
 		 void Draw();
-		static Game &GetGame()
+	 static Game &GetGame()
 		{
-			static Game s_pGame;
-			return s_pGame;
+			 static Game s_pGame;
+			 return s_pGame;
 		}
-		//プレイヤーのゲッター。
-		Player* GetPlayer()
+		
+	 /// <summary>
+	 ///プレイヤーのゲッター。
+	 /// </summary>
+	 /// <returns>
+	 /// プレイヤーのポインタ(Player*)
+	 /// </returns>
+	 Player* GetPlayer()
 		{
 			return &player;
 		}
@@ -45,5 +57,9 @@ class Game
 		BackGround background;
 		//ターン。
 		Phase phase;
+		//ゲームの終わり。
+		GameEnd* gameEnd;
+		//ユーザーインターフェース。
+		UI ui;
 };
 

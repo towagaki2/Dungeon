@@ -11,8 +11,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
-	//ゲーム。
-	//Game::Create();
 
 	//カメラを初期化。
 	
@@ -34,5 +32,4 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//描画終了。
 		g_graphicsEngine->EndRender();
 	}
-	//Game::Destroy();
 }

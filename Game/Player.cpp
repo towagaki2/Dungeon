@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 #include"GameDefine.h"
+#include "GameEnd.h"
 
 
 Player::Player()
@@ -50,21 +51,25 @@ void Player::Move()
 		//移動処理。
 		float XF = 0;
 		float ZF = 0;
+		//十字キー上を押したら。
 		if (g_pad[0].IsTrigger(enButtonUp))
 		{
 			ZF = 1;
 			moveF = 1;
 		}
+		//十字キー下を押したら。
 		if (g_pad[0].IsTrigger(enButtonDown))
 		{
 			ZF = -1;
 			moveF = 1;
 		}
+		//十字キー左を押したら。
 		if (g_pad[0].IsTrigger(enButtonLeft))
 		{
 			XF = -1;
 			moveF = 1;
 		}
+		//十字キー右を押したら。
 		if (g_pad[0].IsTrigger(enButtonRight))
 		{
 			XF = 1;
@@ -74,7 +79,8 @@ void Player::Move()
 		m_moveSpeed.x = XF * masu;
 		m_position += m_moveSpeed;
 
-		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);e
+		//重力(今回いらない)
+		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 
 
 		//攻撃処理。
@@ -83,6 +89,7 @@ void Player::Move()
 			if (masu*1.3 > enpo.Length())
 			{
 				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
+				attackF = 1;
 			}
 			attackF = 1;
 		}
@@ -147,4 +154,23 @@ void Player::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);
+	m_font.BeginDraw();	//フォントの描画開始。
+	wchar_t toubatu[256];
+	swprintf_s(toubatu, L"HP：%d", plHP);	//敵を倒したときに表示する。
+
+	m_font.Draw(
+		toubatu,		//表示する文字列。
+		{ 0.0f,300.0f},			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+	);
+
+	swprintf_s(toubatu, L"空腹度：%d", HUN);	//敵を倒したときに表示する。
+	m_font.Draw(
+		toubatu,		//表示する文字列。
+		{ 300.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+	);
+
+
+	m_font.EndDraw();		//フォントの描画終了。
 }

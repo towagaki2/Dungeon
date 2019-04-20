@@ -1,6 +1,8 @@
 #pragma once
 #include "character/CharacterController.h"
+#include "font.h"
 
+class Font;
 
 class Player
 {
@@ -10,33 +12,37 @@ public:
 	void PlStatus();
 	void Update();
 	void Draw();
-	//プレイヤーのステータスのゲッターセッター。
+	//プレイヤーのHPのゲッター。
 	int GetplHP()
 	{
 		return plHP;
 	}
+	//プレイヤーのHPセッター。
 	void SetplHP(int plplHP)
 	{
 		plHP += plplHP;
 	}
+	//プレイヤーのDEFのゲッター。
 	int GetplDEF()
 	{
 		return plDEF;
 	}
-	//プレイヤーのポジションと向きのゲッター。
+	//プレイヤーのポジションのゲッター。
 	CVector3 GetPosition()
 	{
 		return m_position;
 	}
+	//プレイヤーの向きのゲッター。
 	CQuaternion GetRotation()
 	{
 		return m_rotation;
 	}
-	//プレイヤーのターンフラグのゲッターとセッター。
+	//プレイヤーのターンフラグのゲッター。
 	int GetPlSummaryF()
 	{
 		return summaryF;
 	}
+	//プレイヤーのターンフラグのセッター。
 	void SetPlSummaryF(int plSummaryF)
 	{
 		summaryF = plSummaryF;
@@ -71,5 +77,6 @@ private:
 	CVector3 enpo;										//NPCとPlayerの距離。
 	CQuaternion m_rotation = CQuaternion::Identity();	//回転。	
 	CharacterController m_charaCon;						//キャラクターコントローラーを追加。
+	Font m_font;										////文字表示のインスタンス。
 };
 

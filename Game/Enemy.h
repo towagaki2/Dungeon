@@ -36,11 +36,20 @@ public:
 	{
 		return m_rotation;
 	}
-	//エネミーのターン総括のゲッターセッター。
+	/// <summary>
+	/// エネミーのフラグ総括のゲッター。
+	/// </summary>
+	/// <returns></returns>
 	int GetEneSummaryF()
 	{
 		return summaryF;
 	}
+	/// <summary>
+	/// エネミーのフラグ総括のセッター。
+	/// </summary>
+	/// <param name="eneSummaryF">
+	/// フラグ。
+	/// </param>
 	void SetEneSummaryF(int eneSummaryF)
 	{
 		summaryF = eneSummaryF;
@@ -66,7 +75,7 @@ private:
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
-	AnimationClip m_animationClips[6];					//アニメーションクリップ。
+	AnimationClip m_animationClips[5];					//アニメーションクリップ。
 	CVector3 m_position = {masu*10,0.0f,masu*5};		//座標。
 	CVector3 m_scale = CVector3::One();					//拡大率。
 	CVector3 m_moveSpeed = CVector3::Zero();			//移動速度。

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "Game.h"
+#include "GameEnd.h"
 
 
 Enemy::Enemy()
@@ -9,29 +10,26 @@ Enemy::Enemy()
 	m_model.Init(L"Assets/modelData/Skeleton@Skin.cmo");
 
 	//tkaファイルの読み込み。
-	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");
+	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");		//待機アニメーション。
 	m_animationClips[0].SetLoopFlag(true);
 
-	m_animationClips[1].Load(L"Assets/animData/SkeletonWALK.tka");
+	m_animationClips[1].Load(L"Assets/animData/SkeletonWALK.tka");		//歩きアニメーション。
 	m_animationClips[1].SetLoopFlag(true);
 
-	m_animationClips[2].Load(L"Assets/animData/SkeletonATK.tka");
+	m_animationClips[2].Load(L"Assets/animData/SkeletonATK.tka");		//攻撃アニメーション。
 	m_animationClips[2].SetLoopFlag(true);
 
-	m_animationClips[3].Load(L"Assets/animData/SkeletonDEATH.tka");
+	m_animationClips[3].Load(L"Assets/animData/SkeletonDEATH.tka");		//死亡アニメーション。
 	m_animationClips[3].SetLoopFlag(true);
 
-	m_animationClips[4].Load(L"Assets/animData/SkeletonATK.tka");
+	m_animationClips[4].Load(L"Assets/animData/SkeletonDAMAGE.tka");		//ダメージアニメーション。
 	m_animationClips[4].SetLoopFlag(true);
-
-	m_animationClips[5].Load(L"Assets/animData/SkeletonDAMAGE.tka");
-	m_animationClips[5].SetLoopFlag(true);
 	//アニメーションの初期化。
 	m_animation.Init(
 		m_model,			//アニメーションを流すスキンモデル。
 							//これでアニメーションとスキンモデルが関連付けされる。
 		m_animationClips,	//アニメーションクリップの配列。
-		6					//アニメーションクリップの数。
+		5					//アニメーションクリップの数。
 	);
 
 	m_charaCon.Init(25.0f, 50.0f, m_position); 
@@ -45,6 +43,7 @@ Enemy::~Enemy()
 void Enemy::EnStatus()
 {
 	enHP;
+
 }
 
 void Enemy::Move()
