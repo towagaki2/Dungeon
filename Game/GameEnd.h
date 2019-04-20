@@ -8,5 +8,6 @@ public:
 	~GameEnd();
 	void Update();
 	UI* ui;
+	bool End;
 };
 

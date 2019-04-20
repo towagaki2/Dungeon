@@ -82,14 +82,13 @@ void Player::Move()
 		//d—Í(¡‰ñ‚¢‚ç‚È‚¢)
 		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 
-
+		auto enpo = *(Game::GetGame().GetEnemy()->GetPosition()) - m_position;
 		//UŒ‚ˆ—B
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
 			if (masu*1.3 > enpo.Length())
 			{
 				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
-				attackF = 1;
 			}
 			attackF = 1;
 		}
@@ -108,13 +107,12 @@ void Player::Move()
 		}
 		if (moveF == 1 || attackF == 1 || standF == 1)
 		{
-			if (!m_animation.IsPlaying()) 
-			{
+
 			summaryF = 1;
 			moveF = 0;
 			attackF = 0;
 			standF = 0;
-			}
+			
 		}
 		
 	}

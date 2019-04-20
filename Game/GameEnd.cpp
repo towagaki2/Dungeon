@@ -9,11 +9,13 @@ GameEnd::GameEnd(bool end)
 	if (end == true)
 	{
 		ui=new UI;
+		
 	}
 	else
 	{
 		ui = new UI;
 	}
+	End = end;
 }
 
 
@@ -23,6 +25,6 @@ GameEnd::~GameEnd()
 
 void GameEnd::Update()
 {
-	ui->PostDraw();
+	ui->PostDraw(End);
 		
 }

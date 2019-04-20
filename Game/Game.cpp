@@ -41,11 +41,11 @@ void Game::Update()
 		g_camera3D.Update();
 		if (Game::GetGame().GetPlayer()->GetplHP() <= 0)
 		{
-			gameEnd = new GameEnd(true);
+			gameEnd = new GameEnd(false);
 		}
 		if (Game::GetGame().GetEnemy()->GetenHP() <= 0)
 		{
-			gameEnd = new GameEnd(false);
+			gameEnd = new GameEnd(true);
 		}
 	}
 }
