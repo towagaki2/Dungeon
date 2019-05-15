@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include "GameEnd.h"
+#include "UI.h"
 
 
 
@@ -15,12 +16,10 @@ Game::~Game()
 
 void Game::Update()
 {
-	if (gameEnd == nullptr)
+	if (ui== nullptr)
 	{
-		//ゲームパッドの更新。	
-		for (auto& pad : g_pad) {
-			pad.Update();
-		}
+
+
 		//物理エンジンの更新。
 		g_physics.Update();
 		//プレイヤーの更新。
@@ -41,11 +40,11 @@ void Game::Update()
 		g_camera3D.Update();
 		if (Game::GetGame().GetPlayer()->GetplHP() <= 0)
 		{
-			gameEnd = new GameEnd(false);
+			ui = new UI(false);
 		}
 		if (Game::GetGame().GetEnemy()->GetenHP() <= 0)
 		{
-			gameEnd = new GameEnd(true);
+			ui = new UI(true);
 		}
 	}
 }
@@ -58,7 +57,7 @@ void Game::Draw()
 	player.Draw();
 	//エネミーの描画。
 	enemy.Draw();
-	if (gameEnd != nullptr) {
-		gameEnd->Update();
+	if(ui != nullptr) {
+		ui->Update();
 	}
 }

@@ -56,7 +56,7 @@ void Enemy::Move()
 
 			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
 				//UŒ‚ˆ—
-			if (masu*1.3 > move.Length())
+			if (masu*1.4 > move.Length())
 			{
 				Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
 				attackF = 1;

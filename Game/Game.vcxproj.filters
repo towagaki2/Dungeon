@@ -118,6 +118,7 @@
       <Filter>graphics</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -214,6 +215,7 @@
       <Filter>graphics</Filter>
     </ClInclude>
     <ClInclude Include="UI.h" />
+    <ClInclude Include="title.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -225,5 +227,6 @@
     <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX">
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
+    <MeshContentTask Include="Assets\modelData\tiitel.fbx" />
   </ItemGroup>
 </Project>

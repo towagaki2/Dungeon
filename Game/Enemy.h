@@ -28,9 +28,9 @@ public:
 		return enDEF;
 	}
 	//エネミーの場所と向きのゲッター。
-	const CVector3* GetPosition()
+	const CVector3& GetPosition()
 	{
-		return &m_position;
+		return m_position;
 	}
 	CQuaternion GetRotation()
 	{

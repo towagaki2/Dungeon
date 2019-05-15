@@ -1,9 +1,20 @@
 #include "stdafx.h"
 #include "UI.h"
+#include "GameEnd.h"
+#include "Game.h"
 
-
-UI::UI()
+UI::UI(bool end)
 {
+	if (end == true)
+	{
+		gameEnd = new GameEnd;
+
+	}
+	else
+	{
+		gameEnd = new GameEnd;
+	}
+	End = end;
 }
 
 
@@ -11,30 +22,7 @@ UI::~UI()
 {
 }
 
-void UI::PostDraw(bool END)
+void UI::Update()
 {
-	
-		m_font.BeginDraw();	//フォントの描画開始。
-		wchar_t toubatu[256];
-	if (END == true) 
-	{
-		swprintf_s(toubatu, L"ゲームクリア！");	//敵を倒したときに表示する。
-
-		m_font.Draw(
-			toubatu,		//表示する文字列。
-			{ FRAME_BUFFER_W / 4.0f,-FRAME_BUFFER_H / 4.0f },			//表示する座標。0.0f, 0.0が画面の中心。
-			{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
-		);
-	}
-	if (END == false) 
-	{
-		swprintf_s(toubatu, L"ゲームオーバー！");	//プレイヤーが死んだときに表示する。
-	
-	m_font.Draw(
-		toubatu,		//表示する文字列。
-		{ FRAME_BUFFER_W / 4.0f,-FRAME_BUFFER_H / 4.0f },			//表示する座標。0.0f, 0.0が画面の中心。
-		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
-		);
-	}
-	m_font.EndDraw();		//フォントの描画終了。
+	gameEnd->PostDraw(End);
 }

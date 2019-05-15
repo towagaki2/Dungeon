@@ -58,8 +58,8 @@ class Game
 		//ターン。
 		Phase phase;
 		//ゲームの終わり。
-		GameEnd* gameEnd;
+		GameEnd gameEnd;
 		//ユーザーインターフェース。
-		UI ui;
+		UI* ui;
 };
 

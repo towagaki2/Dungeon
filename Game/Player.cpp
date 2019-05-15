@@ -7,7 +7,6 @@
 
 Player::Player()
 {
-	
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
 
@@ -45,7 +44,7 @@ void Player::PlStatus()
 
 void Player::Move()
 {
-
+	auto enpo = Game::GetGame().GetEnemy()->GetPosition() - m_position;
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::plTaan) {
 
 		//移動処理。
@@ -82,7 +81,7 @@ void Player::Move()
 		//重力(今回いらない)
 		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 
-		auto enpo = *(Game::GetGame().GetEnemy()->GetPosition()) - m_position;
+		
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
@@ -132,37 +131,39 @@ void Player::Turn()
 }
 void Player::Update()
 {
-	//プレイヤーのステータス処理。
-	PlStatus();
-	//移動処理。
-	Move();
-	//回転処理
-	Turn();
-	//アニメーションの更新。
-	m_animation.Update(1.0f/30.0f);
-	//ワールド行列の更新。
-	m_rotation.SetRotationDeg(CVector3::AxisX(), 90.0f);
-	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
-
+		//プレイヤーのステータス処理。
+		PlStatus();
+		//移動処理。
+		Move();
+		//回転処理
+		Turn();
+		//アニメーションの更新。
+		m_animation.Update(1.0f / 30.0f);
+		//ワールド行列の更新。
+		m_rotation.SetRotationDeg(CVector3::AxisX(), 90.0f);
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+		
+	
 }
 
 void Player::Draw()
 {
+
 	m_model.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);
+
 	m_font.BeginDraw();	//フォントの描画開始。
 	wchar_t toubatu[256];
 	swprintf_s(toubatu, L"HP：%d", plHP);	//敵を倒したときに表示する。
-
 	m_font.Draw(
 		toubatu,		//表示する文字列。
-		{ 0.0f,300.0f},			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 0.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
 		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
 	);
 
-	swprintf_s(toubatu, L"空腹度：%d", HUN);	//敵を倒したときに表示する。
+	swprintf_s(toubatu, L"空腹度：%d", HUN);	//空腹度を表示する。
 	m_font.Draw(
 		toubatu,		//表示する文字列。
 		{ 300.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。

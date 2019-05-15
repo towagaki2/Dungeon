@@ -47,6 +47,11 @@ public:
 	{
 		summaryF = plSummaryF;
 	}
+	//満腹度のゲッター。
+	int GetHUN()
+	{
+		return HUN;
+	}
 	//満腹度のセッター。
 	void SetHUN(int SetHun)
 	{
@@ -66,7 +71,7 @@ private:
 	int attackF = 0;		//攻撃フラグ。
 	int standF = 0;			//待機フラグ。
 	int summaryF = 0;		//フラグの総括。
-	
+
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。

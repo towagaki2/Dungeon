@@ -21,7 +21,14 @@ void Phase::Update()
 		{
 			mati = enTaan;
 			Game::GetGame().GetEnemy()->SetEneSummaryF(0);
-			Game::GetGame().GetPlayer()->SetHUN(-1);
+			if (Game::GetGame().GetPlayer()->GetHUN() > 0)
+			{
+				Game::GetGame().GetPlayer()->SetHUN(-1);
+			}
+			if (Game::GetGame().GetPlayer()->GetHUN() <= 0)
+			{
+				Game::GetGame().GetPlayer()->SetplHP(-1);
+			}
 		}
 		break;
 	case enTaan:
