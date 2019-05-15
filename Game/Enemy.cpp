@@ -112,7 +112,7 @@ void Enemy::Update()
 		m_animation.Update(1.0f / 30.0f);
 
 	//ワールド行列の更新。
-		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 8);
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 6.5);
 	
 }
 

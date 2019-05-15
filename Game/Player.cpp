@@ -8,26 +8,27 @@
 Player::Player()
 {
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
+	m_model.Init(L"Assets/modelData/player1fbx.cmo");
 
 	//tkaファイルの読み込み。
-	m_animationClips[0].Load(L"Assets/animData/walk.tka");
-	m_animationClips[0].SetLoopFlag(false);
+	m_animationClips[0].Load(L"Assets/animData/pla_idle.tka");
+	m_animationClips[0].SetLoopFlag(true);
 
-	m_animationClips[1].Load(L"Assets/animData/run.tka");
+	m_animationClips[1].Load(L"Assets/animData/pla_run.tka");
 	m_animationClips[1].SetLoopFlag(true);
+
+	m_animationClips[2].Load(L"Assets/animData/pla_hit.tka");
+	m_animationClips[2].SetLoopFlag(false);
 	//アニメーションの初期化。
 	m_animation.Init(
 		m_model,			//アニメーションを流すスキンモデル。
 							//これでアニメーションとスキンモデルが関連付けされる。
 		m_animationClips,	//アニメーションクリップの配列。
-		2					//アニメーションクリップの数。
+		3					//アニメーションクリップの数。
 	);
 	
 	m_position.y = 0.0f;
 	m_charaCon.Init(10.0f, 50.0f, m_position);
-
-
 }
 
 
@@ -85,10 +86,12 @@ void Player::Move()
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA))
 		{
+			m_animation.Play(2);
 			if (masu*1.3 > enpo.Length())
 			{
 				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
 			}
+			
 			attackF = 1;
 		}
 		//待機処理。
@@ -98,11 +101,11 @@ void Player::Move()
 		}
 		if (moveF == 1)
 		{
-			m_animation.Play(0);
+			m_animation.Play(1);
 		}
 		else
 		{
-			m_animation.Play(1);
+			m_animation.Play(0);
 		}
 		if (moveF == 1 || attackF == 1 || standF == 1)
 		{
@@ -139,9 +142,8 @@ void Player::Update()
 		Turn();
 		//アニメーションの更新。
 		m_animation.Update(1.0f / 30.0f);
-		//ワールド行列の更新。
-		m_rotation.SetRotationDeg(CVector3::AxisX(), 90.0f);
-		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+		////ワールド行列の更新。
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale*1.5);
 		
 	
 }

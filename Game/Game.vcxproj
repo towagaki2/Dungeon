@@ -181,6 +181,7 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
     <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX" />
     <MeshContentTask Include="Assets\modelData\tiitel.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

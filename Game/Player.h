@@ -75,7 +75,7 @@ private:
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
-	AnimationClip m_animationClips[2];					//アニメーションクリップ。
+	AnimationClip m_animationClips[3];					//アニメーションクリップ。
 	CVector3 m_position = CVector3::Zero();				//座標。
 	CVector3 m_scale = CVector3::One();					//拡大率。
 	CVector3 m_moveSpeed = CVector3::Zero();			//移動速度。

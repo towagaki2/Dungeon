@@ -228,5 +228,6 @@
       <Filter>Assets\modelData</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\tiitel.fbx" />
+    <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
   </ItemGroup>
 </Project>
