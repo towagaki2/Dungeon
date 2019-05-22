@@ -119,6 +119,7 @@
     </ClCompile>
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="AutoMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -216,6 +217,7 @@
     </ClInclude>
     <ClInclude Include="UI.h" />
     <ClInclude Include="title.h" />
+    <ClInclude Include="AutoMap.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

@@ -19,6 +19,7 @@ public:
 	}
 
 private:
+
 	Taan mati = plTaan;
 	int PlHun=0;
 };
