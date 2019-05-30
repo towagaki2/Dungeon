@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "RogueLikeMap.h"
 #include "Game.h"
 #include"GameDefine.h"
 #include "GameEnd.h"
 
-
 Player::Player()
 {
+	RogueLikeMap map;
+
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/player1fbx.cmo");
 
@@ -26,9 +28,17 @@ Player::Player()
 		m_animationClips,	//アニメーションクリップの配列。
 		3					//アニメーションクリップの数。
 	);
-	
-	m_position.y = 0.0f;
+		
 	m_charaCon.Init(10.0f, 50.0f, m_position);
+
+	for (int i = 0; i < MAPX_RLk; i++) {
+		for (int j = 0; j < MAPY_RLk; j++) {
+			if (map.mapData != 1) {
+	
+			}
+		}
+	}
+
 }
 
 
@@ -84,15 +94,32 @@ void Player::Move()
 
 		
 		//攻撃処理。
-		if (g_pad[0].IsTrigger(enButtonA))
+		if (g_pad[0].IsTrigger(enButtonA)&&RB1F == false)
 		{
 			m_animation.Play(2);
-			if (masu*1.3 > enpo.Length())
+			if (masu*1.6 > enpo.Length())
 			{
 				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
 			}
 			
 			attackF = 1;
+		}
+		if (g_pad[0].IsPress(enButtonRB1) == true)
+		{
+			RB1F = true;
+			if (g_pad[0].IsTrigger(enButtonA)&&RB1F == true)
+			{
+				plHP += 3;
+				if (plMaxHP < plHP)
+				{
+					plHP = plMaxHP;
+				}
+				attackF = 1;
+			}
+		}
+		else
+		{
+			RB1F = false;
 		}
 		//待機処理。
 		if (g_pad[0].IsTrigger(enButtonX))
@@ -119,13 +146,13 @@ void Player::Move()
 		
 	}
 
-	CVector3 cameraForward = g_camera3D.GetForward();
-	CVector3 cameraRight = g_camera3D.GetRight();
-	//XZ平面での前方方向、右方向に変換する。
-	cameraForward.y = 0.0f;
-	cameraForward.Normalize();
-	cameraRight.y = 0.0f;
-	cameraRight.Normalize();
+	//CVector3 cameraForward = g_camera3D.GetForward();
+	//CVector3 cameraRight = g_camera3D.GetRight();
+	////XZ平面での前方方向、右方向に変換する。
+	//cameraForward.y = 0.0f;
+	//cameraForward.Normalize();
+	//cameraRight.y = 0.0f;
+	//cameraRight.Normalize();
 }
 
 void Player::Turn()
@@ -143,9 +170,7 @@ void Player::Update()
 		//アニメーションの更新。
 		m_animation.Update(1.0f / 30.0f);
 		////ワールド行列の更新。
-		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale*1.5);
-		
-	
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale*1.0);
 }
 
 void Player::Draw()
@@ -158,7 +183,7 @@ void Player::Draw()
 
 	m_font.BeginDraw();	//フォントの描画開始。
 	wchar_t toubatu[256];
-	swprintf_s(toubatu, L"HP：%d", plHP);	//敵を倒したときに表示する。
+	swprintf_s(toubatu, L"HP：%d / %d", plHP,plMaxHP);	//敵を倒したときに表示する。
 	m_font.Draw(
 		toubatu,		//表示する文字列。
 		{ 0.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
@@ -171,7 +196,6 @@ void Player::Draw()
 		{ 300.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
 		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
 	);
-
 
 	m_font.EndDraw();		//フォントの描画終了。
 }

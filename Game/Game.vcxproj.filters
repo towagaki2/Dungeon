@@ -119,7 +119,11 @@
     </ClCompile>
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="title.cpp" />
-    <ClCompile Include="AutoMap.cpp" />
+    <ClCompile Include="RogueLikeMap.cpp" />
+    <ClCompile Include="sound\SoundEngine.cpp" />
+    <ClCompile Include="sound\SoundSource.cpp" />
+    <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="sound\WaveFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -217,7 +221,11 @@
     </ClInclude>
     <ClInclude Include="UI.h" />
     <ClInclude Include="title.h" />
-    <ClInclude Include="AutoMap.h" />
+    <ClInclude Include="RogueLikeMap.h" />
+    <ClInclude Include="sound\SoundEngine.h" />
+    <ClInclude Include="sound\SoundSource.h" />
+    <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="sound\WaveFile.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -231,5 +239,7 @@
     </MeshContentTask>
     <MeshContentTask Include="Assets\modelData\tiitel.fbx" />
     <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
+    <MeshContentTask Include="Assets\modelData\yukaTail.fbx" />
+    <MeshContentTask Include="Assets\modelData\kabe.fbx" />
   </ItemGroup>
 </Project>

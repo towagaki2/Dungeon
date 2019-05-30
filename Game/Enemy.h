@@ -60,7 +60,7 @@ private:
 	void Turn();		//回転処理。
 
 	int enHP = 10;		//体力値。
-	int enATK = 6;		//攻撃力。
+	int enATK = 7;		//攻撃力。
 	int enDEF = 5;		//防御力。
 	
 

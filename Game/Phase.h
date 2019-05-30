@@ -8,6 +8,7 @@ public:
 	{
 		plTaan,			//プレイヤーのターン。
 		enTaan,			//エネミーのターン。
+		taan,			//ターンの総数。
 	};
 
 	Phase();

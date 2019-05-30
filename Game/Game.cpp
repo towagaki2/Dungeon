@@ -12,6 +12,7 @@ Game::Game()
 
 Game::~Game()
 {
+
 }
 
 void Game::Update()
@@ -30,11 +31,11 @@ void Game::Update()
 		background.Update();
 		//ターンの更新。
 		phase.Update();
-		//ゲームエンドの更新。
+	
 
 
 		PlayerPos = Game::GetGame().GetPlayer()->GetPosition();
-		g_camera3D.SetPosition({ PlayerPos.x + 10.0f,800.0f, PlayerPos.z + 10.0f });
+		g_camera3D.SetPosition({ PlayerPos.x + 10.0f,600.0f, PlayerPos.z - 300.0f });
 		g_camera3D.SetTarget({ PlayerPos.x + 10.0f,0.0f, PlayerPos.z + 10.1f });
 		//カメラの更新。
 		g_camera3D.Update();

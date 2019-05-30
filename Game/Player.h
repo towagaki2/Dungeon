@@ -17,7 +17,7 @@ public:
 	{
 		return plHP;
 	}
-	//プレイヤーのHPセッター。
+	//プレイヤーのHPのセッター。
 	void SetplHP(int plplHP)
 	{
 		plHP += plplHP;
@@ -60,18 +60,22 @@ public:
 
 private:
 	
-	int plHP = 10;		//ヒットポイント。
-	int plATK = 10;		//攻撃力。
-	int plDEF = 5;		//防御力。
-	int HUN = 100;		//満腹度。
-	void Move();		//移動処理。
-	void Turn();		//回転処理。　
+	int plMaxHP = 10;		//最大HP。
+	int plHP = plMaxHP;		//現在のHP。
+	int plMaxMP = 5;		//最大MP。
+	int plMP = plMaxHP;		//現在のMP
+	int plATK = 10;			//攻撃力。
+	int plDEF = 5;			//防御力。
+	int HUN = 100;			//満腹度。
+
+	void Move();			//移動処理。
+	void Turn();			//回転処理。　
 
 	int moveF = 0;			//移動フラグ。	
 	int attackF = 0;		//攻撃フラグ。
 	int standF = 0;			//待機フラグ。
 	int summaryF = 0;		//フラグの総括。
-
+	bool RB1F = false;		//RB1押してるかのフラグ。
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。

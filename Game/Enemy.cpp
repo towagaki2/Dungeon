@@ -50,15 +50,22 @@ void Enemy::Move()
 {		
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) { 
 		FrameCounter++;
-		if (FrameCounter > 15) {
+		if (FrameCounter > 0) {
 			//特殊処理
 
 
 			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
 				//攻撃処理
-			if (masu*1.4 > move.Length())
+			if (masu*1.6 > move.Length())
 			{
-				Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
+				if (Game::GetGame().GetPlayer()->GetplDEF() < enATK)
+				{
+					Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
+				}
+				else
+				{
+					Game::GetGame().GetPlayer()->SetplHP(0);
+				}
 				attackF = 1;
 			}
 			if (attackF == 1)
@@ -97,6 +104,7 @@ void Enemy::Move()
 
 void Enemy::Turn()
 {
+	//m_rotation.SetRotationDeg()
 
 }
 
@@ -112,7 +120,7 @@ void Enemy::Update()
 		m_animation.Update(1.0f / 30.0f);
 
 	//ワールド行列の更新。
-		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 6.5);
+		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
 	
 }
 

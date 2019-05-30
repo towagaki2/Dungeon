@@ -2,7 +2,7 @@
 #include "system/system.h"
 #include "Game.h"
 #include"title.h"
-#include"AutoMap.h"
+#include"RogueLikeMap.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -14,7 +14,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 	//カメラを初期化。
-	AutoMap k;
 	g_camera3D.SetTarget({10.0f,10.0f,10.0f});
 	g_camera3D.SetPosition({ 10.0f,800.0f,10.10f });
 	g_camera3D.SetFar(10000.0f);
