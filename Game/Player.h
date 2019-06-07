@@ -12,6 +12,7 @@ public:
 	void PlStatus();
 	void Update();
 	void Draw();
+
 	//プレイヤーのHPのゲッター。
 	int GetplHP()
 	{
@@ -57,24 +58,33 @@ public:
 	{
 		HUN += SetHun;
 	}
+	//経験値のセッター。
+	void SetEXP(int SetExp)
+	{
+		EXP += SetExp;
+	}
 
 private:
-	
+
+	int LV = 1;				//レベル。
+	int EXP = 0;			//経験値。
 	int plMaxHP = 10;		//最大HP。
 	int plHP = plMaxHP;		//現在のHP。
 	int plMaxMP = 5;		//最大MP。
-	int plMP = plMaxHP;		//現在のMP
-	int plATK = 10;			//攻撃力。
-	int plDEF = 5;			//防御力。
+	int plMP = plMaxMP;		//現在のMP。
+	int iniATK = 10;		//初期攻撃力。
+	int plATK = iniATK;		//現在の攻撃力。
+	int iniDEF = 5;			//初期防御力。
+	int plDEF = iniDEF;		//現在の防御力。
 	int HUN = 100;			//満腹度。
 
 	void Move();			//移動処理。
 	void Turn();			//回転処理。　
 
-	int moveF = 0;			//移動フラグ。	
-	int attackF = 0;		//攻撃フラグ。
-	int standF = 0;			//待機フラグ。
-	int summaryF = 0;		//フラグの総括。
+	bool moveF = false;			//移動フラグ。	
+	bool attackF = false;		//攻撃フラグ。
+	bool standF = false;			//待機フラグ。
+	bool summaryF = false;		//フラグの総括。
 	bool RB1F = false;		//RB1押してるかのフラグ。
 
 	SkinModel m_model;									//スキンモデル。

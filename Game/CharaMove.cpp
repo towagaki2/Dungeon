@@ -21,7 +21,6 @@ CVector3 CharaMove::EneMove(CVector3 epos)
 	plpo = Game::GetGame().GetPlayer()->GetPosition() - epos;
 	//エネミーの移動処理。
 	if (Game::GetGame().GetPhase()->GetTaan() == 1) {
-		//if(masu*)
 		plpo.Normalize();
 		if (plpo.x  > 0.001f) 
 		{

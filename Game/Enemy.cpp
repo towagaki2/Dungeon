@@ -66,9 +66,9 @@ void Enemy::Move()
 				{
 					Game::GetGame().GetPlayer()->SetplHP(0);
 				}
-				attackF = 1;
+				attackF = true;
 			}
-			if (attackF == 1)
+			if (attackF == true)
 			{
 				m_animation.Play(2);
 			}
@@ -78,9 +78,9 @@ void Enemy::Move()
 				m_moveSpeed = enemyMove.EneMove(m_position);
 				m_moveSpeed *= masu;
 				m_position += m_moveSpeed;
-				moveF = 1;
+				moveF = true;
 
-				if (moveF == 1)
+				if (moveF == true)
 				{
 					m_animation.Play(1);
 				}
@@ -90,12 +90,12 @@ void Enemy::Move()
 				}
 
 			}		
-			if (moveF == 1 || attackF == 1 || standF == 1)
+			if (moveF == true || attackF == true || standF == true)
 			{
-				summaryF = 1;
-				moveF = 0;
-				attackF = 0;
-				standF = 0;
+				summaryF = true;
+				moveF = false;
+				attackF = false;
+				standF = false;
 				FrameCounter = 0;
 			}
 		}
@@ -104,8 +104,6 @@ void Enemy::Move()
 
 void Enemy::Turn()
 {
-	//m_rotation.SetRotationDeg()
-
 }
 
 void Enemy::Update()

@@ -3,11 +3,11 @@
 
 class Font;
 
-class title
+class Title
 {
 public:
-	title();
-	~title();
+	Title();
+	~Title();
 	void Update();
 	void Draw();
 	bool GetTitleF()

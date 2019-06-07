@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "title.h"
+#include "Title.h"
 
 
-title::title()
+Title::Title()
 {
 	m_titleModel.Init(L"Assets/modelData/tiitel.cmo");
 	m_titleModel.UpdateWorldMatrix(m_position, m_rotation, {10.0f,10.0f,10.0f});
 }
 
 
-title::~title()
+Title::~Title()
 {
 }
-void title::Update()
+void Title::Update()
 {
 
 	if (titleF == false &&g_pad[0].IsTrigger(enButtonA))
@@ -21,7 +21,7 @@ void title::Update()
 	}
 	
 }
-void title::Draw()
+void Title::Draw()
 {
 	if (titleF == false) {
 		m_titleModel.Draw(

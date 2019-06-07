@@ -2,15 +2,20 @@
 #include "Phase.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "title.h"
 #include "level/Level.h"
 #include "BackGround.h"
 #include "GameEnd.h"
 #include "UI.h"
+#include "RogueLikeMap.h"
+
 class Player;
 class Phase;
 class Enemy;
+class titel;
 class GameEnd;
 class UI;
+class RogueLikeMap;
 
 class Game
 {
@@ -24,6 +29,8 @@ class Game
 			 static Game s_pGame;
 			 return s_pGame;
 		}
+	 void StartGame();
+	 void EndGame();
 		
 	 /// <summary>
 	 ///プレイヤーのゲッター。
@@ -33,33 +40,40 @@ class Game
 	 /// </returns>
 	 Player* GetPlayer()
 		{
-			return &player;
+			return player;
 		}
 		//エネミーのゲッター。
 		Enemy* GetEnemy()
 		{
-			return &enemy;
+			return enemy;
 		}
 		//ターンのゲッター。
 		Phase* GetPhase()
 		{
-			return &phase;
+			return phase;
+		}
+		//グランドのゲッター。
+		BackGround* GetBackGround()
+		{
+			return background;
 		}
 	protected:
 		Game();
 	private:
 		CVector3 PlayerPos;
 		//プレイヤー。
-		Player player;
+		Player* player;
 		//エネミー。
-		Enemy enemy;
+		Enemy* enemy;
+		//タイトル。
+		Title* title;
 		//バックグランド。
-		BackGround background;
+		BackGround* background;
 		//ターン。
-		Phase phase;
-		//ゲームの終わり。
-		GameEnd gameEnd;
+		Phase* phase;
 		//ユーザーインターフェース。
 		UI* ui;
+		//マップ生成。
+		RogueLikeMap* rogueLikeMap;
 };
 

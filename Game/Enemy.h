@@ -66,10 +66,10 @@ private:
 
 	CharaMove enemyMove;	//移動制御。
 
-	int moveF = 0;			//移動フラグ。	
-	int attackF = 0;		//攻撃フラグ。
-	int standF = 0;			//待機フラグ。
-	int summaryF = 0;		//フラグの総括。
+	bool moveF = false;			//移動フラグ。	
+	bool attackF = false;		//攻撃フラグ。
+	bool standF = false;			//待機フラグ。
+	bool summaryF = false;		//フラグの総括。
 
 	int FrameCounter = 0;		//フレームのカウンター。
 

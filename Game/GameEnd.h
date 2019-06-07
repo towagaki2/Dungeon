@@ -1,6 +1,8 @@
 #pragma once
 #include "font.h"
+#include "Game.h"
 class UI;
+class Game;
 class GameEnd
 {
 public:

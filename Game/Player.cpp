@@ -1,13 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "RogueLikeMap.h"
 #include "Game.h"
 #include"GameDefine.h"
 #include "GameEnd.h"
 
 Player::Player()
 {
-	RogueLikeMap map;
 
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/player1fbx.cmo");
@@ -28,19 +26,15 @@ Player::Player()
 		m_animationClips,	//アニメーションクリップの配列。
 		3					//アニメーションクリップの数。
 	);
-		
+
 	m_charaCon.Init(10.0f, 50.0f, m_position);
+	std::random_device rnd;     // 非決定的な乱数生成器を生成
+	std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
+	std::uniform_int_distribution<> GetRand(0, 1000);        // [0, 99] 範囲の一様乱数
 
-	for (int i = 0; i < MAPX_RLk; i++) {
-		for (int j = 0; j < MAPY_RLk; j++) {
-			if (map.mapData != 1) {
-	
-			}
-		}
-	}
-
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition();
+	m_position.y = 50.0f;
 }
-
 
 Player::~Player()
 {
@@ -65,25 +59,25 @@ void Player::Move()
 		if (g_pad[0].IsTrigger(enButtonUp))
 		{
 			ZF = 1;
-			moveF = 1;
+			moveF = true;
 		}
 		//十字キー下を押したら。
 		if (g_pad[0].IsTrigger(enButtonDown))
 		{
 			ZF = -1;
-			moveF = 1;
+			moveF = true;
 		}
 		//十字キー左を押したら。
 		if (g_pad[0].IsTrigger(enButtonLeft))
 		{
 			XF = -1;
-			moveF = 1;
+			moveF = true;
 		}
 		//十字キー右を押したら。
 		if (g_pad[0].IsTrigger(enButtonRight))
 		{
 			XF = 1;
-			moveF = 1;
+			moveF = true;
 		}
 		m_moveSpeed.z = ZF * masu;
 		m_moveSpeed.x = XF * masu;
@@ -102,19 +96,23 @@ void Player::Move()
 				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
 			}
 			
-			attackF = 1;
+			attackF = true;
 		}
 		if (g_pad[0].IsPress(enButtonRB1) == true)
 		{
 			RB1F = true;
+			//回復魔法。
 			if (g_pad[0].IsTrigger(enButtonA)&&RB1F == true)
 			{
-				plHP += 3;
-				if (plMaxHP < plHP)
-				{
-					plHP = plMaxHP;
+				if (plMP > 2) {
+					plHP += 6;
+					plMP -= 2;
+					if (plMaxHP < plHP)
+					{
+						plHP = plMaxHP;
+					}
 				}
-				attackF = 1;
+				attackF = true;
 			}
 		}
 		else
@@ -124,9 +122,9 @@ void Player::Move()
 		//待機処理。
 		if (g_pad[0].IsTrigger(enButtonX))
 		{
-			standF = 1;
+			standF = true;
 		}
-		if (moveF == 1)
+		if (moveF == true)
 		{
 			m_animation.Play(1);
 		}
@@ -134,25 +132,16 @@ void Player::Move()
 		{
 			m_animation.Play(0);
 		}
-		if (moveF == 1 || attackF == 1 || standF == 1)
+		if (moveF == true || attackF == true || standF == true)
 		{
 
-			summaryF = 1;
-			moveF = 0;
-			attackF = 0;
-			standF = 0;
+			summaryF = true;
+			moveF = false;
+			attackF = false;
+			standF = false;
 			
-		}
-		
+		}	
 	}
-
-	//CVector3 cameraForward = g_camera3D.GetForward();
-	//CVector3 cameraRight = g_camera3D.GetRight();
-	////XZ平面での前方方向、右方向に変換する。
-	//cameraForward.y = 0.0f;
-	//cameraForward.Normalize();
-	//cameraRight.y = 0.0f;
-	//cameraRight.Normalize();
 }
 
 void Player::Turn()
@@ -183,19 +172,30 @@ void Player::Draw()
 
 	m_font.BeginDraw();	//フォントの描画開始。
 	wchar_t toubatu[256];
-	swprintf_s(toubatu, L"HP：%d / %d", plHP,plMaxHP);	//敵を倒したときに表示する。
+	swprintf_s(toubatu, L"HP：%d/%d", plHP,plMaxHP);	//HPを表示する。
 	m_font.Draw(
 		toubatu,		//表示する文字列。
-		{ 0.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
-		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+		{ -300.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 0.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
 	);
 
 	swprintf_s(toubatu, L"空腹度：%d", HUN);	//空腹度を表示する。
 	m_font.Draw(
 		toubatu,		//表示する文字列。
 		{ 300.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
-		{ 1.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+		{ 0.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
 	);
-
+	swprintf_s(toubatu, L"MP：%d/%d", plMP,plMaxMP);	//MPを表示する。
+	m_font.Draw(
+		toubatu,		//表示する文字列。
+		{ 0.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 0.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+	);
+	swprintf_s(toubatu, L"LV：%d", LV);	//LVを表示する。
+	m_font.Draw(
+		toubatu,		//表示する文字列。
+		{ -600.0f,300.0f },			//表示する座標。0.0f, 0.0が画面の中心。
+		{ 0.0f,0.0f,0.0f,1.0f }, 0.0, 3.0, { 1.0f,1.0f }
+	);
 	m_font.EndDraw();		//フォントの描画終了。
 }
