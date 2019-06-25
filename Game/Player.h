@@ -39,7 +39,7 @@ public:
 		return m_rotation;
 	}
 	//プレイヤーのターンフラグのゲッター。
-	int GetPlSummaryF()
+	bool GetPlSummaryF()
 	{
 		return summaryF;
 	}
@@ -68,6 +68,7 @@ private:
 
 	int LV = 1;				//レベル。
 	int EXP = 0;			//経験値。
+	int exp = 10;			//レベルアップするのにいる経験値。
 	int plMaxHP = 10;		//最大HP。
 	int plHP = plMaxHP;		//現在のHP。
 	int plMaxMP = 5;		//最大MP。

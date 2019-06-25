@@ -99,6 +99,8 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="HorrorMan.cpp" />
     <ClCompile Include="RogueLikeMap.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -134,6 +136,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
+    <ClCompile Include="Stairs.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -145,6 +148,8 @@
     <ClCompile Include="sound\WaveFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="HorrorMan.h" />
     <ClInclude Include="RogueLikeMap.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="character\CharacterController.h" />
@@ -183,6 +188,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="sound\SoundEngine.h" />
+    <ClInclude Include="Stairs.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="Title.h" />
@@ -194,6 +200,7 @@
     <MeshContentTask Include="Assets\modelData\kabe.fbx" />
     <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
     <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX" />
+    <MeshContentTask Include="Assets\modelData\Staire.fbx" />
     <MeshContentTask Include="Assets\modelData\tiitel.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)\Assets\modelData\%(Filename).cmo</ContentOutput>

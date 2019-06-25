@@ -2,20 +2,26 @@
 #include "Phase.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "EnemyManager.h"
+#include "HorrorMan.h"
 #include "title.h"
 #include "level/Level.h"
 #include "BackGround.h"
 #include "GameEnd.h"
 #include "UI.h"
 #include "RogueLikeMap.h"
+#include "Stairs.h"
 
 class Player;
 class Phase;
 class Enemy;
+class EnemyManager;
+class HorrorMan;
 class titel;
 class GameEnd;
 class UI;
 class RogueLikeMap;
+class Stairs;
 
 class Game
 {
@@ -45,7 +51,18 @@ class Game
 		//エネミーのゲッター。
 		Enemy* GetEnemy()
 		{
-			return enemy;
+				return enemy[1];
+			
+		}
+		//エネミーマネージャーのゲッター。
+		EnemyManager* GetEnemymanager()
+		{
+			return  enemyManager;
+		}
+		//ホラーマンのゲッター。
+		Enemy* GetHorrorMan()
+		{
+			return enemy[1];
 		}
 		//ターンのゲッター。
 		Phase* GetPhase()
@@ -64,7 +81,11 @@ class Game
 		//プレイヤー。
 		Player* player;
 		//エネミー。
-		Enemy* enemy;
+		Enemy* enemy[2];
+		//エネミーマネージャー。
+		EnemyManager* enemyManager;
+		//ホラーマン。
+		//HorrorMan* horrorMan;
 		//タイトル。
 		Title* title;
 		//バックグランド。
@@ -75,5 +96,7 @@ class Game
 		UI* ui;
 		//マップ生成。
 		RogueLikeMap* rogueLikeMap;
+		//階段。
+		Stairs* stairs;
 };
 

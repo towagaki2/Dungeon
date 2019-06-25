@@ -19,8 +19,11 @@ Game::~Game()
 void Game::StartGame()
 {
 	background = new BackGround;
+	stairs = new Stairs;
 	player = new Player;
-	enemy = new Enemy;
+	enemy[0] = new Enemy(7,7,5);
+	enemy[1] = new HorrorMan(7,7,5);
+	enemyManager = new EnemyManager;
 	phase = new Phase;
 	rogueLikeMap = new RogueLikeMap;
 	delete title;
@@ -29,10 +32,14 @@ void Game::StartGame()
 void Game::EndGame()
 {
 	delete player;
-	delete enemy;
+	for (int i = 0; i < 2; i++) {
+		delete enemy[i];
+	}
+	delete enemyManager;
 	delete background;
 	delete phase;
 	delete ui;
+	delete stairs;
 	ui = nullptr;
 	title = new Title;
 }
@@ -49,7 +56,11 @@ void Game::Update()
 			//プレイヤーの更新。
 			player->Update();
 			//エネミーの更新。
-			enemy->Update();
+			enemy[1]->Update();
+			//エネミーマネージャーの更新。
+			enemyManager->Update();
+			//階段の更新。
+			stairs->Update();
 			//バックグランドの更新。
 			background->Update();
 			//ターンの更新。
@@ -66,10 +77,17 @@ void Game::Update()
 			{
 				ui = new UI(false);
 			}
-			if (Game::GetGame().GetEnemy()->GetenHP() <= 0)
+			if (stairs->GetStairsF() == true)
 			{
 				ui = new UI(true);
 			}
+				if (Game::GetGame().GetEnemy()->GetenHP() <= 0)
+				{
+					
+						delete enemy[1];
+					
+				}
+			
 		}
 	}
 	else {
@@ -88,12 +106,16 @@ void Game::Draw()
 			title = nullptr;
 		}
 	}
-	else {		//バックグランドの描画。
+	else {		
+		//バックグランドの描画。
 		background->Draw();
+		//階段の描画。
+		stairs->Draw();
 		//プレイヤーの描画。
 		player->Draw();
 		//エネミーの描画。
-		enemy->Draw();
+		enemy[1]->Draw();
+
 		if (ui != nullptr) {
 			ui->Update();
 		}

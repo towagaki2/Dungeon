@@ -1,14 +1,18 @@
 #include "stdafx.h"
 #include "Enemy.h"
 #include "Game.h"
-#include "GameEnd.h"
 
 
-Enemy::Enemy()
+
+Enemy::Enemy(int HP, int ATK, int DEF) :
+	enHP(HP),
+	enATK(ATK),
+	enDEF(DEF)
+
 {
+
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Skeleton@Skin.cmo");
-
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");		//待機アニメーション。
 	m_animationClips[0].SetLoopFlag(true);
@@ -31,19 +35,16 @@ Enemy::Enemy()
 		m_animationClips,	//アニメーションクリップの配列。
 		5					//アニメーションクリップの数。
 	);
-
-	m_charaCon.Init(25.0f, 50.0f, m_position); 
+	m_charaCon.Init(25.0f, 50.0f, m_position);
+	m_position.y = 50.0f;
+	//ポジション決め。
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition();
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
+	
 }
 
 Enemy::~Enemy()
 {
-}
-
-void Enemy::EnStatus()
-{
-	enHP;
-
 }
 
 void Enemy::Move()
@@ -58,19 +59,18 @@ void Enemy::Move()
 				//攻撃処理
 			if (masu*1.6 > move.Length())
 			{
-				if (Game::GetGame().GetPlayer()->GetplDEF() < enATK)
-				{
-					Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
-				}
-				else
-				{
-					Game::GetGame().GetPlayer()->SetplHP(0);
-				}
-				attackF = true;
-			}
-			if (attackF == true)
-			{
+					if (Game::GetGame().GetPlayer()->GetplDEF() < enATK)
+					{
+						Game::GetGame().GetPlayer()->SetplHP(Game::GetGame().GetPlayer()->GetplDEF() - enATK);
+					}
+					//プレイヤーの防御力と同じまたはそれ以下ならダメージを与えない。
+					else
+					{
+						Game::GetGame().GetPlayer()->SetplHP(0);
+					}
+
 				m_animation.Play(2);
+				attackF = true;
 			}
 			else
 				//移動処理
@@ -108,24 +108,25 @@ void Enemy::Turn()
 
 void Enemy::Update()
 {
-		//エネミーのステータス処理。
-		EnStatus();
+		
 		//移動処理。
 		Move();
 		//回転処理
 		Turn();
-		//アニメーションの更新。
-		m_animation.Update(1.0f / 30.0f);
-
 	//ワールド行列の更新。
-		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
+	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
+	//アニメーションの更新。
+	m_animation.Update(1.0f / 30.0f);
 	
 }
 
 void Enemy::Draw()
 {
-	m_model.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix()
-	);
+	if (Game::GetGame().GetEnemymanager()->Getsyurui() == EnemyManager::horrorman)
+	{
+		m_model.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix()
+		);
+	}
 }

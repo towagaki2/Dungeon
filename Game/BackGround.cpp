@@ -15,6 +15,7 @@ BackGround::BackGround()
 			if (mapdate[i][j].mapData!=1) {
 				//cmoファイルの読み込み。
 				m_model[i][j].Init(L"Assets/modelData/yukaTail.cmo");
+				count++;
 				m_model[i][j].UpdateWorldMatrix(pos, CQuaternion::Identity(), { 1.0f,1.0f,1.0f });
 ;
 			}else
@@ -27,9 +28,9 @@ BackGround::BackGround()
 			mapArray[i][j] = mapdate[i][j];
 			m_position[i][j] = pos;
 		}
-		pos.y = -masu;
+		pos.y = 0.0f;
 		pos.z += masu;
-		pos.x = 25.0f;
+		pos.x = 0.0f;
 	}
 }
 

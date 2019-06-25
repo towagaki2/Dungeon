@@ -15,7 +15,6 @@ CharaMove::~CharaMove()
 CVector3 CharaMove::EneMove(CVector3 epos)
 {
 	//m_moveSpeedの初期化。
-
 	m_moveSpeed = CVector3::Zero();
 	//エネミーからプレイヤーまでの距離。
 	plpo = Game::GetGame().GetPlayer()->GetPosition() - epos;

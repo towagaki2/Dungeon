@@ -49,7 +49,7 @@ int rogueLikeMapMake(DungeonMap_RL* const dng, T& maprl)
 {
 	std::random_device rnd;     // 非決定的な乱数生成器を生成
 	std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
-	std::uniform_int_distribution<> GetRand(0, 10000);        // [0, 99] 範囲の一様乱数
+	std::uniform_int_distribution<> GetRand(0, 10000);        // [0, 10000] 範囲の一様乱数
 	if (maprl.size() == 0 || maprl.front().size() == 0) return -1;
 	for (size_t i = 0; i < maprl.size(); ++i)
 		for (size_t j = 0; j < maprl[i].size(); ++j)

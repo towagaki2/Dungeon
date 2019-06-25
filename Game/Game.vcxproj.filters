@@ -124,6 +124,9 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="HorrorMan.cpp" />
+    <ClCompile Include="Stairs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -226,6 +229,9 @@
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="HorrorMan.h" />
+    <ClInclude Include="Stairs.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -241,5 +247,6 @@
     <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
     <MeshContentTask Include="Assets\modelData\yukaTail.fbx" />
     <MeshContentTask Include="Assets\modelData\kabe.fbx" />
+    <MeshContentTask Include="Assets\modelData\Staire.fbx" />
   </ItemGroup>
 </Project>

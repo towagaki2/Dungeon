@@ -28,9 +28,7 @@ Player::Player()
 	);
 
 	m_charaCon.Init(10.0f, 50.0f, m_position);
-	std::random_device rnd;     // 非決定的な乱数生成器を生成
-	std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
-	std::uniform_int_distribution<> GetRand(0, 1000);        // [0, 99] 範囲の一様乱数
+
 
 	m_position = Game::GetGame().GetBackGround()->GetMapPosition();
 	m_position.y = 50.0f;
@@ -160,6 +158,20 @@ void Player::Update()
 		m_animation.Update(1.0f / 30.0f);
 		////ワールド行列の更新。
 		m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale*1.0);
+		if (EXP >= exp)
+		{
+			LV++;
+			exp += 10;
+			//ステータスアップ。
+			plMaxHP += 5;
+			plMaxMP += 5;
+			plATK += 5 ;
+			plDEF += 5;
+			//レベルアップによる回復。
+			plHP = plMaxHP;
+			plMP = plMaxMP;
+			HUN = 100;
+		}
 }
 
 void Player::Draw()

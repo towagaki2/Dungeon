@@ -6,11 +6,21 @@
 class Enemy
 {
 public:
-	Enemy();
+	Enemy(int HP, int ATK,int DEF);
 	~Enemy();
-	void EnStatus();
 	void Update();
 	void Draw();
+
+
+	//エネミーの場所と向きのゲッター。
+	const CVector3& GetPosition()
+	{
+		return m_position;
+	}
+	CQuaternion GetRotation()
+	{
+		return m_rotation;
+	}
 
 	//エネミーHPのゲッター。
 	int GetenHP()
@@ -27,22 +37,25 @@ public:
 	{
 		return enDEF;
 	}
-	//エネミーの場所と向きのゲッター。
-	const CVector3& GetPosition()
-	{
-		return m_position;
-	}
-	CQuaternion GetRotation()
-	{
-		return m_rotation;
-	}
 	/// <summary>
 	/// エネミーのフラグ総括のゲッター。
 	/// </summary>
 	/// <returns></returns>
-	int GetEneSummaryF()
+	bool GetEneSummaryF()
 	{
 		return summaryF;
+	}
+	bool GetEneAttackF()
+	{
+		return attackF;
+	}
+	int Getnumber()
+	{
+		return enemynamber;
+	}
+	bool GetdeathF()
+	{
+		return deathF;
 	}
 	/// <summary>
 	/// エネミーのフラグ総括のセッター。
@@ -59,19 +72,20 @@ private:
 	void Move();		//移動処理。
 	void Turn();		//回転処理。
 
-	int enHP = 10;		//体力値。
-	int enATK = 7;		//攻撃力。
-	int enDEF = 5;		//防御力。
-	
+	int enemynamber = 10;		//エネミーの総数。
 
 	CharaMove enemyMove;	//移動制御。
 
 	bool moveF = false;			//移動フラグ。	
 	bool attackF = false;		//攻撃フラグ。
-	bool standF = false;			//待機フラグ。
+	bool standF = false;		//待機フラグ。
 	bool summaryF = false;		//フラグの総括。
+	bool deathF = false;		//死亡フラグ。　　　俺この戦いが終わったら・・・・
 
 	int FrameCounter = 0;		//フレームのカウンター。
+	int enHP = 10;					//体力値。
+	int enATK = 7;					//攻撃力。
+	int enDEF = 5;					//防御力。
 
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
