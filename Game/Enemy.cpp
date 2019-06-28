@@ -38,13 +38,15 @@ Enemy::Enemy(int HP, int ATK, int DEF) :
 	m_charaCon.Init(25.0f, 50.0f, m_position);
 	m_position.y = 50.0f;
 	//ポジション決め。
-	m_position = Game::GetGame().GetBackGround()->GetMapPosition();
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition(enemyMove.chatate, enemyMove.chayoko);
+	
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	
 }
 
 Enemy::~Enemy()
 {
+
 }
 
 void Enemy::Move()
@@ -113,6 +115,15 @@ void Enemy::Update()
 		Move();
 		//回転処理
 		Turn();
+		if (enHP <= 0)
+		{
+			deathF = true;
+		}
+		else 
+		{
+			deathF = false;
+		}
+		m_position.y = 50.0f;
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
 	//アニメーションの更新。

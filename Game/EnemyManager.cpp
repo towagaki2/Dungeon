@@ -4,6 +4,9 @@
 
 EnemyManager::EnemyManager()
 {
+	enemy[0] = new Enemy(0, 0, 0);
+	enemy[1] = new HorrorMan(7, 7, 5);
+
 	//エネミーを10体だす。
 	for (int i = 0; i < teki; i++)
 	{
@@ -19,11 +22,20 @@ EnemyManager::EnemyManager()
 
 EnemyManager::~EnemyManager()
 {
+	delete enemy[0];
+	if (enemy[1] != nullptr) {
+		delete enemy[1];
+		enemy[1] = nullptr;
+	}
+
 }
 
 void EnemyManager::Update()
 {
-	
+	//エネミーの更新。
+	if (enemy[1] != nullptr) {
+		enemy[1]->Update();
+	}
 	switch (syurui)
 	{
 	case kara:
@@ -46,6 +58,22 @@ void EnemyManager::Update()
 		break;
 	case horrorman:
 		
+
 		break;
+	}
+	if (enemy[1] != nullptr) {
+		if (Game::GetGame().GetEnemy()->GetdeathF() == true)
+		{
+			delete enemy[1];
+			enemy[1] = nullptr;
+		}
+	}
+}
+
+void EnemyManager::Draw()
+{
+	//エネミーの描画。
+	if (enemy[1] != nullptr) {
+		enemy[1]->Draw();
 	}
 }

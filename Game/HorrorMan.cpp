@@ -9,6 +9,7 @@ HorrorMan::HorrorMan(int HP, int ATK, int DEF):Enemy(HP, ATK, DEF)
 	horrorATK = ATK;
 	horrorDEF = DEF;
 	this->SetenHP(horrorHP);
+	
 }
 
 

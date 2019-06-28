@@ -64,6 +64,9 @@ public:
 		EXP += SetExp;
 	}
 
+	int pltate = 0;
+	int plyoko = 0;
+
 private:
 
 	int LV = 1;				//ƒŒƒxƒ‹B

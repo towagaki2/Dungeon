@@ -29,8 +29,9 @@ Player::Player()
 
 	m_charaCon.Init(10.0f, 50.0f, m_position);
 
-
-	m_position = Game::GetGame().GetBackGround()->GetMapPosition();
+	
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition(pltate,plyoko);
+	
 	m_position.y = 50.0f;
 }
 
@@ -47,7 +48,10 @@ void Player::PlStatus()
 
 void Player::Move()
 {
-	auto enpo = Game::GetGame().GetEnemy()->GetPosition() - m_position;
+	CVector3 enpo = { 1000000.0f,10000000.0f,0.0f };
+	if (Game::GetGame().GetEnemy() != nullptr) {
+		enpo = Game::GetGame().GetEnemy()->GetPosition() - m_position;
+	}
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::plTaan) {
 
 		//à⁄ìÆèàóùÅB
@@ -77,10 +81,20 @@ void Player::Move()
 			XF = 1;
 			moveF = true;
 		}
-		m_moveSpeed.z = ZF * masu;
-		m_moveSpeed.x = XF * masu;
-		m_position += m_moveSpeed;
 
+		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF))
+		{
+			pltate += ZF;
+			plyoko += XF;
+			m_moveSpeed.z = ZF * masu;
+			m_moveSpeed.x = XF * masu;
+			m_position += m_moveSpeed;
+		}
+		else
+		{
+			moveF = false;
+		}
+		
 		//èdóÕ(ç°âÒÇ¢ÇÁÇ»Ç¢)
 		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
 

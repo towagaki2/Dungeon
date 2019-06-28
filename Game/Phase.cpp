@@ -20,7 +20,9 @@ void Phase::Update()
 		if (Game::GetGame().GetPlayer()->GetPlSummaryF()==true)
 		{
 			mati = enTaan;
-			Game::GetGame().GetEnemy()->SetEneSummaryF(false);
+			if (Game::GetGame().GetEnemy() != nullptr) {
+				Game::GetGame().GetEnemy()->SetEneSummaryF(false);
+			}
 			if (Game::GetGame().GetPlayer()->GetHUN() > 0)
 			{
 				Game::GetGame().GetPlayer()->SetHUN(-1);
@@ -32,11 +34,17 @@ void Phase::Update()
 		}
 		break;
 	case enTaan:
-		if (Game::GetGame().GetEnemy()->GetEneSummaryF()== true)
-		{
-			mati = plTaan;
-			Game::GetGame().GetPlayer()->SetPlSummaryF(false);
+		if (Game::GetGame().GetEnemy() != nullptr) {
+			if (Game::GetGame().GetEnemy()->GetEneSummaryF() == true)
+			{
+				mati = plTaan;
+				Game::GetGame().GetPlayer()->SetPlSummaryF(false);
+			}
 		}
+			else {
+				mati = plTaan;
+				Game::GetGame().GetPlayer()->SetPlSummaryF(false);
+			}
 		break;
 	}
 }

@@ -37,9 +37,14 @@ CVector3 CharaMove::EneMove(CVector3 epos)
 		{
 			plpo.z = -1;
 		}
-		//移動方向の代入。
-		m_moveSpeed.x = plpo.x;
-		m_moveSpeed.z = plpo.z;
+		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(chatate + plpo.z, chayoko + plpo.x))
+		{
+			chatate += plpo.z;
+			chayoko += plpo.x;
+			//移動方向の代入。
+			m_moveSpeed.x = plpo.x;
+			m_moveSpeed.z = plpo.z;
+		}
 		//移動の計算を返す。
 	}
 	return m_moveSpeed;

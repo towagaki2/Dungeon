@@ -21,8 +21,6 @@ void Game::StartGame()
 	background = new BackGround;
 	stairs = new Stairs;
 	player = new Player;
-	enemy[0] = new Enemy(7,7,5);
-	enemy[1] = new HorrorMan(7,7,5);
 	enemyManager = new EnemyManager;
 	phase = new Phase;
 	rogueLikeMap = new RogueLikeMap;
@@ -32,9 +30,6 @@ void Game::StartGame()
 void Game::EndGame()
 {
 	delete player;
-	for (int i = 0; i < 2; i++) {
-		delete enemy[i];
-	}
 	delete enemyManager;
 	delete background;
 	delete phase;
@@ -55,8 +50,6 @@ void Game::Update()
 			g_physics.Update();
 			//プレイヤーの更新。
 			player->Update();
-			//エネミーの更新。
-			enemy[1]->Update();
 			//エネミーマネージャーの更新。
 			enemyManager->Update();
 			//階段の更新。
@@ -81,13 +74,10 @@ void Game::Update()
 			{
 				ui = new UI(true);
 			}
-				if (Game::GetGame().GetEnemy()->GetenHP() <= 0)
-				{
-					
-						delete enemy[1];
-					
-				}
 			
+			
+			
+				
 		}
 	}
 	else {
@@ -114,8 +104,7 @@ void Game::Draw()
 		//プレイヤーの描画。
 		player->Draw();
 		//エネミーの描画。
-		enemy[1]->Draw();
-
+		enemyManager->Draw();
 		if (ui != nullptr) {
 			ui->Update();
 		}

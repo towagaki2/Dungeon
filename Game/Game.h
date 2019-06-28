@@ -51,7 +51,7 @@ class Game
 		//エネミーのゲッター。
 		Enemy* GetEnemy()
 		{
-				return enemy[1];
+			return enemyManager->GetEnemy();
 			
 		}
 		//エネミーマネージャーのゲッター。
@@ -62,7 +62,7 @@ class Game
 		//ホラーマンのゲッター。
 		Enemy* GetHorrorMan()
 		{
-			return enemy[1];
+			return enemyManager->GetEnemy();
 		}
 		//ターンのゲッター。
 		Phase* GetPhase()
@@ -80,8 +80,6 @@ class Game
 		CVector3 PlayerPos;
 		//プレイヤー。
 		Player* player;
-		//エネミー。
-		Enemy* enemy[2];
 		//エネミーマネージャー。
 		EnemyManager* enemyManager;
 		//ホラーマン。
