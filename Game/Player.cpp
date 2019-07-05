@@ -49,8 +49,10 @@ void Player::PlStatus()
 void Player::Move()
 {
 	CVector3 enpo = { 1000000.0f,10000000.0f,0.0f };
-	if (Game::GetGame().GetEnemy() != nullptr) {
-		enpo = Game::GetGame().GetEnemy()->GetPosition() - m_position;
+	for (int i = 0; i < 10; i++) {
+		if (Game::GetGame().GetEnemy(i) != nullptr) {
+			enpo = Game::GetGame().GetEnemy(i)->GetPosition() - m_position;
+		}
 	}
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::plTaan) {
 
@@ -81,7 +83,8 @@ void Player::Move()
 			XF = 1;
 			moveF = true;
 		}
-
+		//進む方向が壁じゃないなら進む。
+		//壁なら移動せずターンは進まない。
 		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF))
 		{
 			pltate += ZF;
@@ -97,23 +100,23 @@ void Player::Move()
 		
 		//重力(今回いらない)
 		//m_moveSpeed.y -= 980.0f * (1.0f / 30.0f);
-
 		
 		//攻撃処理。
 		if (g_pad[0].IsTrigger(enButtonA)&&RB1F == false)
 		{
 			m_animation.Play(2);
-			if (masu*1.6 > enpo.Length())
-			{
-				Game::GetGame().GetEnemy() ->SetenHP(Game::GetGame().GetEnemy()->GetenDEF() - plATK);
+			for (int i = 0; i < teki; i++) {
+				
+				if (Game::GetGame().GetEnemy(i) != nullptr) {
+					Game::GetGame().GetEnemy(i)->SetenHP(m_position, Game::GetGame().GetEnemy(i)->GetenDEF() - plATK);
+				}
 			}
-			
 			attackF = true;
 		}
 		if (g_pad[0].IsPress(enButtonRB1) == true)
 		{
 			RB1F = true;
-			//回復魔法。
+			//ホイミー。
 			if (g_pad[0].IsTrigger(enButtonA)&&RB1F == true)
 			{
 				if (plMP > 2) {

@@ -4,9 +4,6 @@
 
 EnemyManager::EnemyManager()
 {
-	enemy[0] = new Enemy(0, 0, 0);
-	enemy[1] = new HorrorMan(7, 7, 5);
-
 	//エネミーを10体だす。
 	for (int i = 0; i < teki; i++)
 	{
@@ -14,6 +11,12 @@ EnemyManager::EnemyManager()
 		std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
 		std::uniform_int_distribution<> GetRand(1, 1);        // [0, 99] 範囲の一様乱数
 		ran = GetRand(Rand);
+		if (ran == 0) {
+			enemy[i] = new Enemy(0, 0, 0);
+		}
+		else {
+			enemy[i] = new HorrorMan(7, 7, 5);
+		}
 		EnemyDeci[i] = ran;
 		m_number++;
 	}
@@ -33,8 +36,10 @@ EnemyManager::~EnemyManager()
 void EnemyManager::Update()
 {
 	//エネミーの更新。
-	if (enemy[1] != nullptr) {
-		enemy[1]->Update();
+	for (int i = 0; i < teki; i++) {
+		if (enemy[i] != nullptr) {
+			enemy[i]->Update();
+		}
 	}
 	switch (syurui)
 	{
@@ -57,23 +62,30 @@ void EnemyManager::Update()
 		}
 		break;
 	case horrorman:
+		if (EnemyDeci[1] == 0)syurui = kara;
 		
-
 		break;
 	}
-	if (enemy[1] != nullptr) {
-		if (Game::GetGame().GetEnemy()->GetdeathF() == true)
-		{
-			delete enemy[1];
-			enemy[1] = nullptr;
+
+	for (int i = 0; i < teki; i++) {
+			if (enemy[i] != nullptr) {
+				if (enemy[i]->GetdeathF() == true)
+				{
+					Game::GetGame().GetPlayer()->SetEXP(2);
+					delete enemy[i];
+					enemy[i] = nullptr;
+					EnemyDeci[i] = 0;
+					syurui = kara;
+				}
+			}
 		}
-	}
 }
 
 void EnemyManager::Draw()
 {
+	for(int i = 0; i < teki; i++)
 	//エネミーの描画。
-	if (enemy[1] != nullptr) {
-		enemy[1]->Draw();
+	if (enemy[i] != nullptr) {
+		enemy[i]->Draw();
 	}
 }

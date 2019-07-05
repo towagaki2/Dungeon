@@ -12,9 +12,9 @@ public:
 	void Draw();
 
 	//エネミーのゲッター。
-	Enemy* GetEnemy()
+	Enemy* GetEnemy(int no)
 	{
-			return enemy[1];
+			return enemy[no];
 	
 	}
 
@@ -31,7 +31,7 @@ public:
 private:
 	Enemysyurui syurui = kara;		//エネミーの種類。
 	int EnemyDeci[teki];			//エネミーの種類を決める。						
-	Enemy* enemy[2];				//エネミー。
+	Enemy* enemy[teki];				//エネミー。
 	int ran = 0;					//ランダムで決められた数字の入れ物。
 	int m_number = 0;				//エネミーのカウンター。
 };

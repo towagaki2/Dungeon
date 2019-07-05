@@ -28,9 +28,11 @@ public:
 		return enHP;
 	}
 	//エネミーHPのセッター。
-	void SetenHP(int enenHP)
+	void SetenHP(CVector3 pos, int enenHP)
 	{
-		enHP += enenHP;
+		if ((pos - m_position).Length()<=masu*1.6) {
+			enHP += enenHP;
+		}
 	}
 	//エネミーDEFのゲッター。
 	int GetenDEF()

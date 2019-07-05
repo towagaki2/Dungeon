@@ -11,6 +11,8 @@
 #include "UI.h"
 #include "RogueLikeMap.h"
 #include "Stairs.h"
+#include "sound/SoundEngine.h"
+#include "sound/SoundSource.h"
 
 class Player;
 class Phase;
@@ -49,9 +51,9 @@ class Game
 			return player;
 		}
 		//エネミーのゲッター。
-		Enemy* GetEnemy()
+		Enemy* GetEnemy(int no)
 		{
-			return enemyManager->GetEnemy();
+			return enemyManager->GetEnemy(no);
 			
 		}
 		//エネミーマネージャーのゲッター。
@@ -62,7 +64,7 @@ class Game
 		//ホラーマンのゲッター。
 		Enemy* GetHorrorMan()
 		{
-			return enemyManager->GetEnemy();
+			return enemyManager->GetEnemy(1);
 		}
 		//ターンのゲッター。
 		Phase* GetPhase()
@@ -77,6 +79,12 @@ class Game
 	protected:
 		Game();
 	private:
+		//サウンドエンジン。
+		CSoundEngine m_soundEngine;			
+		//再生中のBGMの番号。
+		int m_playBgmNo = 0;		
+		//BGM。
+		CSoundSource m_bgm;		
 		CVector3 PlayerPos;
 		//プレイヤー。
 		Player* player;
