@@ -40,7 +40,11 @@ void EnemyManager::Update()
 		if (enemy[i] != nullptr) {
 			enemy[i]->Update();
 		}
+		else {
+			enemy[i] = new HorrorMan(7, 7, 5);
+		}
 	}
+	
 	switch (syurui)
 	{
 	case kara:
