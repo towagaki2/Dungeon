@@ -4,19 +4,21 @@
 #include"GameDefine.h"
 #include "GameEnd.h"
 
+
+
 Player::Player()
 {
-
+	SetType(CharaType::player);
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/player1fbx.cmo");
 
 	//tkaファイルの読み込み。
 	m_animationClips[0].Load(L"Assets/animData/pla_idle.tka");
 	m_animationClips[0].SetLoopFlag(true);
-
+	//歩きモーション。
 	m_animationClips[1].Load(L"Assets/animData/pla_run.tka");
 	m_animationClips[1].SetLoopFlag(true);
-
+	//攻撃モーション
 	m_animationClips[2].Load(L"Assets/animData/pla_hit.tka");
 	m_animationClips[2].SetLoopFlag(false);
 	//アニメーションの初期化。
@@ -26,12 +28,19 @@ Player::Player()
 		m_animationClips,	//アニメーションクリップの配列。
 		3					//アニメーションクリップの数。
 	);
+	//サウンドエンジンを初期化。
+	m_soundEngine.Init();
+	//SE。
+	m_AtkSE.Init(L"Assets/music/sword_gesture.wav");
+	m_MoveSE.Init(L"Assets/music/plmove.wav");
+	m_CureSE.Init(L"Assets/music/magic_status_cure.wav");
+	NewPos();
 
-	m_charaCon.Init(10.0f, 50.0f, m_position);
+}
+void Player::NewPos()
+{
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition(pltate, plyoko);
 
-	
-	m_position = Game::GetGame().GetBackGround()->GetMapPosition(pltate,plyoko);
-	
 	m_position.y = 50.0f;
 }
 
@@ -41,9 +50,6 @@ Player::~Player()
 
 void Player::PlStatus()
 {
-	plHP;
-	HUN;
-
 }
 
 void Player::Move()
@@ -85,13 +91,14 @@ void Player::Move()
 		}
 		//進む方向が壁じゃないなら進む。
 		//壁なら移動せずターンは進まない。
-		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF))
+		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF,this))
 		{
 			pltate += ZF;
 			plyoko += XF;
 			m_moveSpeed.z = ZF * masu;
 			m_moveSpeed.x = XF * masu;
 			m_position += m_moveSpeed;
+			m_MoveSE.Play(false);
 		}
 		else
 		{
@@ -111,6 +118,7 @@ void Player::Move()
 					Game::GetGame().GetEnemy(i)->SetenHP(m_position, Game::GetGame().GetEnemy(i)->GetenDEF() - plATK);
 				}
 			}
+			m_AtkSE.Play(false);
 			attackF = true;
 		}
 		if (g_pad[0].IsPress(enButtonRB1) == true)
@@ -127,11 +135,13 @@ void Player::Move()
 						plHP = plMaxHP;
 					}
 				}
+				m_CureSE.Play(false);
 				attackF = true;
 			}
 		}
 		else
 		{
+			
 			RB1F = false;
 		}
 		//待機処理。
@@ -139,6 +149,7 @@ void Player::Move()
 		{
 			standF = true;
 		}
+		//アニメーション処理。
 		if (moveF == true)
 		{
 			m_animation.Play(1);
@@ -147,13 +158,16 @@ void Player::Move()
 		{
 			m_animation.Play(0);
 		}
+		//もし移動、攻撃、待機などのフラグが立っていたら総括フラグを立てる。
 		if (moveF == true || attackF == true || standF == true)
 		{
-
 			summaryF = true;
 			moveF = false;
 			attackF = false;
 			standF = false;
+			m_AtkSE.Stop();
+			m_MoveSE.Stop();
+			m_CureSE.Stop();
 			
 		}	
 	}

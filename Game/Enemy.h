@@ -2,8 +2,8 @@
 #include "character/CharacterController.h"
 #include "CharaMove.h"
 #include"GameDefine.h"
-
-class Enemy
+#include "CharaDeta.h"
+class Enemy :public CharaDeta
 {
 public:
 	Enemy(int HP, int ATK,int DEF);
@@ -12,6 +12,16 @@ public:
 	void Draw();
 
 
+	void RoomIn(std::vector<CharaDeta*> date)
+	{
+		for (int i = 0; i < date.size(); i++) {
+			if (date[i]->GetType() == player)
+			{
+				enemyMove.Setjoutai(CharaMove::osou);
+				break;
+			}
+		}
+	}
 	//エネミーの場所と向きのゲッター。
 	const CVector3& GetPosition()
 	{
@@ -97,7 +107,6 @@ private:
 	CVector3 m_scale = CVector3::One();					//拡大率。
 	CVector3 m_moveSpeed = CVector3::Zero();			//移動速度。
 	CQuaternion m_rotation = CQuaternion::Identity();	//回転。								
-	CharacterController m_charaCon;			//キャラクターコントローラーを追加。
 	
 };
 

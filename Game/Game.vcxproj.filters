@@ -127,6 +127,7 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="HorrorMan.cpp" />
     <ClCompile Include="Stairs.cpp" />
+    <ClCompile Include="CharaDeta.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -232,6 +233,7 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="HorrorMan.h" />
     <ClInclude Include="Stairs.h" />
+    <ClInclude Include="CharaDeta.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">

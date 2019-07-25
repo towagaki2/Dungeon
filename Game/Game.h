@@ -76,22 +76,25 @@ class Game
 		{
 			return background;
 		}
+
+		void EndAndStrat();			//終わりと始まり。
+
 	protected:
 		Game();
 	private:
+
+		int kai=0;
+
 		//サウンドエンジン。
 		CSoundEngine m_soundEngine;			
-		//再生中のBGMの番号。
-		int m_playBgmNo = 0;		
 		//BGM。
 		CSoundSource m_bgm;		
+		//プレイヤーのポジション。
 		CVector3 PlayerPos;
 		//プレイヤー。
 		Player* player;
 		//エネミーマネージャー。
 		EnemyManager* enemyManager;
-		//ホラーマン。
-		//HorrorMan* horrorMan;
 		//タイトル。
 		Title* title;
 		//バックグランド。

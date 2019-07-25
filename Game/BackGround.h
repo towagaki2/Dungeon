@@ -1,8 +1,10 @@
 #pragma once
 #include "physics/PhysicsStaticObject.h"
 #include"GameDefine.h"
-
 #include"RogueLikeMap.h"
+
+class CharaDeta;
+
 class BackGround
 {
 public:
@@ -58,20 +60,50 @@ public:
 					}
 
 				}
+
 			}
+
 		}
 		return m_position[0][0];
 	}
-	bool GetKabeOrYuka(int tate,int yoko)
+	void deletedata(int No, CharaDeta* point)
 	{
-		if (mapArray[tate][yoko].mapData == 1)
+		if (No != 0)
 		{
-			return true;
+			Room[No].erase(std::remove(Room[No].begin(), Room[No].end(), (CharaDeta*)point), Room[No].end());
 		}
-		return false;
+	}
+	template <class T>
+	bool GetKabeOrYuka(int tate,int yoko, T point)
+	{
+		if (mapArray[tate][yoko].mapData != 1)
+		{
+			auto No = mapArray[tate][yoko].roomNo;
+			if (No !=0)
+			{
+				auto it = std::find(Room[No].begin(), Room[No].end(), (CharaDeta*)point);
+				if (it == Room[No].end()) {
+					((CharaDeta*)point)->RoomNo=No;
+					Room[No].push_back((CharaDeta*)point);
+					for (int i = 0; i < Room[No].size(); i++)
+					{
+						Room[No].at(i)->RoomIn(Room[No]);
+					}
+				}
+			}
+			else
+			{
+				auto no = ((CharaDeta*)point)->RoomNo;
+				Room[no].erase(std::remove(Room[no].begin(), Room[no].end(), (CharaDeta*)point), Room[no].end());
+				((CharaDeta*)point)->RoomNo = 0;
+			}
+			return false;
+		}
+		return true;
 	}
 private:
 	std::vector<std::vector<RogueLikeMap>> mapArray;
+	std::vector<std::vector<CharaDeta*>> Room;
 	SkinModel m_model[MAPX_RLk][MAPY_RLk];				//スキンモデル。
 	CVector3 m_position[MAPX_RLk][MAPY_RLk];				//座標。
 	CVector3 m_scale = CVector3::One();					//拡大率。

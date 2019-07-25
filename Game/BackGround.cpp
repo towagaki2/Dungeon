@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BackGround.h"
 #include"GameDefine.h"
+#include"CharaDeta.h"
 
 BackGround::BackGround()
 {
@@ -32,6 +33,8 @@ BackGround::BackGround()
 		pos.z += masu;
 		pos.x = 0.0f;
 	}
+	Room.clear();
+	Room.resize(mapArray[0][0].size);
 }
 
 

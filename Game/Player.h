@@ -1,10 +1,13 @@
 #pragma once
 #include "character/CharacterController.h"
 #include "font.h"
+#include "CharaDeta.h"
+#include "sound/SoundEngine.h"
+#include "sound/SoundSource.h"
 
 class Font;
 
-class Player
+class Player:public CharaDeta
 {
 public:
 	Player();
@@ -12,7 +15,11 @@ public:
 	void PlStatus();
 	void Update();
 	void Draw();
+	void NewPos();
+	void RoomIn(std::vector<CharaDeta*> date)
+	{
 
+	}
 	//プレイヤーのHPのゲッター。
 	int GetplHP()
 	{
@@ -78,9 +85,10 @@ private:
 	int plMP = plMaxMP;		//現在のMP。
 	int iniATK = 10;		//初期攻撃力。
 	int plATK = iniATK;		//現在の攻撃力。
-	int iniDEF = 5;			//初期防御力。
+	int iniDEF = 50;		//初期防御力。
 	int plDEF = iniDEF;		//現在の防御力。
-	int HUN = 100;			//満腹度。
+	int HUN = 100000;		//満腹度。
+
 
 	void Move();			//移動処理。
 	void Turn();			//回転処理。　
@@ -91,6 +99,12 @@ private:
 	bool summaryF = false;		//フラグの総括。
 	bool RB1F = false;		//RB1押してるかのフラグ。
 
+
+
+	CSoundEngine m_soundEngine;							//サウンドエンジン。
+	CSoundSource m_MoveSE;								//移動SE。
+	CSoundSource m_AtkSE;								//攻撃SE。
+	CSoundSource m_CureSE;								//回復SE。
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
 	AnimationClip m_animationClips[3];					//アニメーションクリップ。
@@ -99,7 +113,6 @@ private:
 	CVector3 m_moveSpeed = CVector3::Zero();			//移動速度。
 	CVector3 enpo;										//NPCとPlayerの距離。
 	CQuaternion m_rotation = CQuaternion::Identity();	//回転。	
-	CharacterController m_charaCon;						//キャラクターコントローラーを追加。
-	Font m_font;										////文字表示のインスタンス。
+	Font m_font;										//文字表示のインスタンス。
 };
 

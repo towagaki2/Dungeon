@@ -25,25 +25,48 @@ Game::~Game()
 
 void Game::StartGame()
 {
+	
 	background = new BackGround;
+
 	stairs = new Stairs;
-	player = new Player;
-	enemyManager = new EnemyManager;
 	phase = new Phase;
 	rogueLikeMap = new RogueLikeMap;
-	delete title;
+	enemyManager = new EnemyManager;
+	player = new Player;
+	if (title != nullptr) {
+		delete title;
+	}
+}
+
+void Game::EndAndStrat()
+{
+	delete enemyManager;
+	delete background;
+	delete rogueLikeMap;
+	delete phase;
+	delete stairs;
+	background = new BackGround;
+	stairs = new Stairs;
+	phase = new Phase;
+	rogueLikeMap = new RogueLikeMap;
+	enemyManager = new EnemyManager;
+	player->NewPos();
+	
 }
 
 void Game::EndGame()
 {
-	delete player;
-	delete enemyManager;
-	delete background;
-	delete phase;
-	delete ui;
-	delete stairs;
-	ui = nullptr;
-	title = new Title;
+	
+		delete player;
+		delete enemyManager;
+		delete background;
+		delete rogueLikeMap;
+		delete phase;
+		delete ui;
+		delete stairs;
+		ui = nullptr;
+		title = new Title;
+		kai = 0;
 }
 
 void Game::Update()
@@ -81,9 +104,16 @@ void Game::Update()
 
 			if (stairs->GetStairsF() == true)
 			{
-				ui = new UI(true);
+				if (kai >= Last) {
+					ui = new UI(true);
+				}else
+				{
+					kai++;
+					EndAndStrat();
+				}
+
 			}
-			
+
 		}
 
 	}

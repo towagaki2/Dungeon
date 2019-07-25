@@ -99,6 +99,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CharaDeta.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="HorrorMan.cpp" />
     <ClCompile Include="RogueLikeMap.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="sound\WaveFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CharaDeta.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="HorrorMan.h" />
     <ClInclude Include="RogueLikeMap.h" />

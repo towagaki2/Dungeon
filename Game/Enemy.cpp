@@ -11,23 +11,32 @@ Enemy::Enemy(int HP, int ATK, int DEF) :
 
 {
 
+	SetType(CharaType::enemy);
+
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Skeleton@Skin.cmo");
+
 	//tkaファイルの読み込み。
-	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");		//待機アニメーション。
+	//待機アニメーション。
+	m_animationClips[0].Load(L"Assets/animData/SkeletonIDLE.tka");		
 	m_animationClips[0].SetLoopFlag(true);
 
-	m_animationClips[1].Load(L"Assets/animData/SkeletonWALK.tka");		//歩きアニメーション。
+	//歩きアニメーション。
+	m_animationClips[1].Load(L"Assets/animData/SkeletonWALK.tka");		
 	m_animationClips[1].SetLoopFlag(true);
 
-	m_animationClips[2].Load(L"Assets/animData/SkeletonATK.tka");		//攻撃アニメーション。
+	//攻撃アニメーション。
+	m_animationClips[2].Load(L"Assets/animData/SkeletonATK.tka");
 	m_animationClips[2].SetLoopFlag(true);
 
-	m_animationClips[3].Load(L"Assets/animData/SkeletonDEATH.tka");		//死亡アニメーション。
+	//死亡アニメーション。
+	m_animationClips[3].Load(L"Assets/animData/SkeletonDEATH.tka");	
 	m_animationClips[3].SetLoopFlag(true);
 
-	m_animationClips[4].Load(L"Assets/animData/SkeletonDAMAGE.tka");		//ダメージアニメーション。
+	//ダメージアニメーション。
+	m_animationClips[4].Load(L"Assets/animData/SkeletonDAMAGE.tka");	
 	m_animationClips[4].SetLoopFlag(true);
+
 	//アニメーションの初期化。
 	m_animation.Init(
 		m_model,			//アニメーションを流すスキンモデル。
@@ -35,17 +44,19 @@ Enemy::Enemy(int HP, int ATK, int DEF) :
 		m_animationClips,	//アニメーションクリップの配列。
 		5					//アニメーションクリップの数。
 	);
-	m_charaCon.Init(25.0f, 50.0f, m_position);
+
 	m_position.y = 50.0f;
+
 	//ポジション決め。
 	m_position = Game::GetGame().GetBackGround()->GetMapPosition(enemyMove.chatate, enemyMove.chayoko);
-	
+
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	
 }
 
 Enemy::~Enemy()
 {
+	Game::GetGame().GetBackGround()->deletedata(RoomNo, this);
 
 }
 
@@ -54,7 +65,7 @@ void Enemy::Move()
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) { 
 		FrameCounter++;
 		if (FrameCounter > 0) {
-			//特殊処理
+			//特殊処理(眠るや混乱など追加予定。)
 
 
 			auto move = Game::GetGame().GetPlayer()->GetPosition() - m_position;
@@ -77,21 +88,21 @@ void Enemy::Move()
 			else
 				//移動処理
 			{
-				m_moveSpeed = enemyMove.EneMove(m_position);
+				m_moveSpeed = enemyMove.EneMove(m_position,this);
 				m_moveSpeed *= masu;
 				m_position += m_moveSpeed;
 				moveF = true;
-
-				if (moveF == true)
-				{
-					m_animation.Play(1);
-				}
-				else
-				{
-					m_animation.Play(0);
-				}
-
 			}		
+
+			if (moveF == true)
+			{
+				m_animation.Play(1);
+			}
+			else
+			{
+				m_animation.Play(0);
+			}
+
 			if (moveF == true || attackF == true || standF == true)
 			{
 				summaryF = true;
@@ -100,6 +111,8 @@ void Enemy::Move()
 				standF = false;
 				FrameCounter = 0;
 			}
+
+
 		}
 	}
 }
