@@ -87,6 +87,7 @@ public:
 					Room[No].push_back((CharaDeta*)point);
 					for (int i = 0; i < Room[No].size(); i++)
 					{
+
 						Room[No].at(i)->RoomIn(Room[No]);
 					}
 				}

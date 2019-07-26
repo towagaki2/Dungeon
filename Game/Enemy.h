@@ -3,6 +3,8 @@
 #include "CharaMove.h"
 #include"GameDefine.h"
 #include "CharaDeta.h"
+#include "sound/SoundEngine.h"
+#include "sound/SoundSource.h"
 class Enemy :public CharaDeta
 {
 public:
@@ -100,6 +102,9 @@ private:
 	int enATK = 7;					//攻撃力。
 	int enDEF = 5;					//防御力。
 
+	CSoundEngine m_soundEngine;							//サウンドエンジン。
+	CSoundSource m_MoveSE;								//移動SE。
+	CSoundSource m_AtkSE;								//攻撃SE。
 	SkinModel m_model;									//スキンモデル。
 	Animation m_animation;								//アニメーション。
 	AnimationClip m_animationClips[5];					//アニメーションクリップ。

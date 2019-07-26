@@ -78,8 +78,6 @@ void Game::Update()
 				
 			//物理エンジンの更新。
 			g_physics.Update();
-			//サウンドエンジンを更新。
-			m_soundEngine.Update();
 			//プレイヤーの更新。
 			player->Update();
 			//エネミーマネージャーの更新。
@@ -97,6 +95,8 @@ void Game::Update()
 
 			//カメラの更新。
 			g_camera3D.Update();
+			//サウンドエンジンを更新。
+			m_soundEngine.Update();
 			if (Game::GetGame().GetPlayer()->GetplHP() <= 0)
 			{
 				ui = new UI(false);

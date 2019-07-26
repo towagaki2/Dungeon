@@ -45,6 +45,11 @@ Enemy::Enemy(int HP, int ATK, int DEF) :
 		5					//アニメーションクリップの数。
 	);
 
+	//サウンドエンジンを初期化。
+	m_soundEngine.Init();
+	//SE。
+	m_AtkSE.Init(L"Assets/music/kick_middle.wav");
+
 	m_position.y = 50.0f;
 
 	//ポジション決め。
@@ -81,7 +86,7 @@ void Enemy::Move()
 					{
 						Game::GetGame().GetPlayer()->SetplHP(0);
 					}
-
+				m_AtkSE.Play(false);
 				m_animation.Play(2);
 				attackF = true;
 			}
@@ -137,6 +142,8 @@ void Enemy::Update()
 			deathF = false;
 		}
 		m_position.y = 50.0f;
+	//効果音の更新。
+	m_soundEngine.Update();
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
 	//アニメーションの更新。

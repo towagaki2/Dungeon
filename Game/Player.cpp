@@ -98,7 +98,6 @@ void Player::Move()
 			m_moveSpeed.z = ZF * masu;
 			m_moveSpeed.x = XF * masu;
 			m_position += m_moveSpeed;
-			m_MoveSE.Play(false);
 		}
 		else
 		{
@@ -152,6 +151,8 @@ void Player::Move()
 		//アニメーション処理。
 		if (moveF == true)
 		{
+
+			m_MoveSE.Play(false);
 			m_animation.Play(1);
 		}
 		else
@@ -164,11 +165,7 @@ void Player::Move()
 			summaryF = true;
 			moveF = false;
 			attackF = false;
-			standF = false;
-			m_AtkSE.Stop();
-			m_MoveSE.Stop();
-			m_CureSE.Stop();
-			
+			standF = false;	
 		}	
 	}
 }
@@ -183,6 +180,8 @@ void Player::Update()
 		PlStatus();
 		//移動処理。
 		Move();
+		//効果音の更新。
+		m_soundEngine.Update();
 		//回転処理
 		Turn();
 		//アニメーションの更新。
