@@ -2,7 +2,7 @@
 //マスのサイズ。
 #define masu 50.0f
 //エネミーの最大数。
-#define teki 100
+#define teki 10
 //ダンジョンの最終階層。
 #define Last 5
 /*マップ系データ*/
