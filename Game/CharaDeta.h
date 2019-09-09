@@ -19,7 +19,7 @@ public:
 		m_Type = Type;
 	}
 	virtual void RoomIn(std::vector<CharaDeta*> date){};
-	int RoomNo=0;
+	int RoomNo = 0;
 private:
 	CharaType m_Type;
 

@@ -38,14 +38,14 @@ CVector3 CharaMove::EneMove(CVector3 epos,Enemy* enemy)
 	{
 
 
-		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(chatate + tansak.z, chayoko + tansak.x, enemy))
-		{
-			chatate += tansak.z;
-			chayoko += tansak.x;
-			//ˆÚ“®•ûŒü‚Ì‘ã“üB
-			m_moveSpeed.x = tansak.x;
-			m_moveSpeed.z = tansak.z;
-		}
+		//if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(chatate + tansak.z, chayoko + tansak.x, enemy))
+		//{
+		//	chatate += tansak.z;
+		//	chayoko += tansak.x;
+		//	//ˆÚ“®•ûŒü‚Ì‘ã“üB
+		//	m_moveSpeed.x = tansak.x;
+		//	m_moveSpeed.z = tansak.z;
+		//}
 	}
 	if (kinmu == osou)
 	{ 

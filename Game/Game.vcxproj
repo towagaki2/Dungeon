@@ -102,6 +102,7 @@
     <ClCompile Include="CharaDeta.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="HorrorMan.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="RogueLikeMap.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="CharaDeta.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="HorrorMan.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="RogueLikeMap.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="character\CharacterController.h" />
@@ -199,7 +201,9 @@
     <ClInclude Include="sound\WaveFile.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\Bread.fbx" />
     <MeshContentTask Include="Assets\modelData\kabe.fbx" />
+    <MeshContentTask Include="Assets\modelData\kaihukunotama.fbx" />
     <MeshContentTask Include="Assets\modelData\player1fbx.fbx" />
     <MeshContentTask Include="Assets\modelData\Skeleton%40Skin.FBX" />
     <MeshContentTask Include="Assets\modelData\Staire.fbx" />

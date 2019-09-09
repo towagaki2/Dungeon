@@ -28,7 +28,7 @@ protected:
 
 private:
 	Enemy * enemy;						//エネミー。	
-
+	int LV = 1;							//レベル。
 	int horrorHP = 7;					//体力値。
 	int horrorATK = 7;					//攻撃力。
 	int horrorDEF = 5;					//防御力。

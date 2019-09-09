@@ -3,8 +3,6 @@
 #include "GameEnd.h"
 #include "UI.h"
 
-
-
 Game::Game()
 {
 	title = new Title;
@@ -25,14 +23,13 @@ Game::~Game()
 
 void Game::StartGame()
 {
-	
 	background = new BackGround;
-
 	stairs = new Stairs;
 	phase = new Phase;
 	rogueLikeMap = new RogueLikeMap;
-	enemyManager = new EnemyManager;
 	player = new Player;
+	enemyManager = new EnemyManager;
+	item = new Item;
 	if (title != nullptr) {
 		delete title;
 	}
@@ -45,18 +42,19 @@ void Game::EndAndStrat()
 	delete rogueLikeMap;
 	delete phase;
 	delete stairs;
+	delete item;
+
 	background = new BackGround;
 	stairs = new Stairs;
 	phase = new Phase;
 	rogueLikeMap = new RogueLikeMap;
-	enemyManager = new EnemyManager;
 	player->NewPos();
-	
+	enemyManager = new EnemyManager;
+	item = new Item;
 }
 
 void Game::EndGame()
 {
-	
 		delete player;
 		delete enemyManager;
 		delete background;
@@ -64,6 +62,8 @@ void Game::EndGame()
 		delete phase;
 		delete ui;
 		delete stairs;
+		delete item;
+
 		ui = nullptr;
 		title = new Title;
 		kai = 0;
@@ -75,7 +75,6 @@ void Game::Update()
 	{
 		if (ui == nullptr)
 		{
-				
 			//物理エンジンの更新。
 			g_physics.Update();
 			//プレイヤーの更新。
@@ -84,6 +83,8 @@ void Game::Update()
 			enemyManager->Update();
 			//階段の更新。
 			stairs->Update();
+			//アイテムの更新。
+			item->Update();
 			//バックグランドの更新。
 			background->Update();
 			//ターンの更新。
@@ -101,7 +102,6 @@ void Game::Update()
 			{
 				ui = new UI(false);
 			}
-
 			if (stairs->GetStairsF() == true)
 			{
 				if (kai >= Last) {
@@ -111,17 +111,13 @@ void Game::Update()
 					kai++;
 					EndAndStrat();
 				}
-
 			}
-
 		}
-
 	}
 	else {
 		title->Update();
 		title->Draw();
 	}
-
 }
 
 
@@ -138,6 +134,8 @@ void Game::Draw()
 		background->Draw();
 		//階段の描画。
 		stairs->Draw();
+		//アイテムの描画。
+		item->Draw();
 		//プレイヤーの描画。
 		player->Draw();
 		//エネミーの描画。
@@ -146,5 +144,4 @@ void Game::Draw()
 			ui->Update();
 		}
 	}
-
 }

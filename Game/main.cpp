@@ -29,11 +29,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			pad.Update();
 		}
 		//ƒQ[ƒ€‚ÌXVB
-
 		Game::GetGame().Update();
 		//ƒQ[ƒ€‚Ì•`‰æB
 		Game::GetGame().Draw();
-
 		//•`‰æI—¹B
 		g_graphicsEngine->EndRender();
 	}

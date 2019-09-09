@@ -12,11 +12,12 @@ public:
 	~BackGround();
 	void Update();
 	void Draw();
-	CVector3 GetMapPosition(int& tate,int& yoko)
+	template <class T>
+	CVector3 GetMapPosition(int& tate,int& yoko,T point)
 	{
 		std::random_device rnd;     // 非決定的な乱数生成器を生成
 		std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
-		std::uniform_int_distribution<> GetRand(0, count);        // [0, 99] 範囲の一様乱数
+		std::uniform_int_distribution<> GetRand(1, count);        // [0, 99] 範囲の一様乱数
 		int ran=GetRand(Rand);
 		int cou = 0;
 		for (int i = 0; i < MAPX_RLk; i++) {
@@ -29,6 +30,7 @@ public:
 					else {
 						tate = i;
 						yoko = j;
+						Roomcall(mapArray[i][j].roomNo, point);
 						return m_position[i][j];
 
 						break;
@@ -43,7 +45,7 @@ public:
 	{
 		std::random_device rnd;     // 非決定的な乱数生成器を生成
 		std::mt19937 Rand(rnd());     //  メルセンヌ・ツイスタの32ビット版、引数は初期シード値
-		std::uniform_int_distribution<> GetRand(0, count);        // [0, 99] 範囲の一様乱数
+		std::uniform_int_distribution<> GetRand(1, count);        // [0, 99] 範囲の一様乱数
 		int ran = GetRand(Rand);
 		int cou = 0;
 		for (int i = 0; i < MAPX_RLk; i++) {
@@ -68,7 +70,7 @@ public:
 	}
 	void deletedata(int No, CharaDeta* point)
 	{
-		if (No != 0)
+		if (No >= 0)
 		{
 			Room[No].erase(std::remove(Room[No].begin(), Room[No].end(), (CharaDeta*)point), Room[No].end());
 		}
@@ -79,28 +81,39 @@ public:
 		if (mapArray[tate][yoko].mapData != 1)
 		{
 			auto No = mapArray[tate][yoko].roomNo;
-			if (No !=0)
-			{
-				auto it = std::find(Room[No].begin(), Room[No].end(), (CharaDeta*)point);
-				if (it == Room[No].end()) {
-					((CharaDeta*)point)->RoomNo=No;
-					Room[No].push_back((CharaDeta*)point);
-					for (int i = 0; i < Room[No].size(); i++)
-					{
 
-						Room[No].at(i)->RoomIn(Room[No]);
-					}
-				}
+			if (No != 0)
+			{	
+				Roomcall(No, point);
 			}
 			else
 			{
 				auto no = ((CharaDeta*)point)->RoomNo;
-				Room[no].erase(std::remove(Room[no].begin(), Room[no].end(), (CharaDeta*)point), Room[no].end());
-				((CharaDeta*)point)->RoomNo = 0;
+				if (no >= 0) {
+					Room[no].erase(std::remove(Room[no].begin(), Room[no].end(), (CharaDeta*)point), Room[no].end());
+
+				}
+				((CharaDeta*)point)->RoomNo = -1;
 			}
 			return false;
 		}
 		return true;
+	}
+	template <class T>
+	void Roomcall(int No, T point)
+	{
+		No -= 1;
+		if (No >= 0) {
+			auto it = std::find(Room[No].begin(), Room[No].end(), (CharaDeta*)point);
+			if (it == Room[No].end()) {
+				((CharaDeta*)point)->RoomNo = No;
+				Room[No].push_back((CharaDeta*)point);
+				for (int i = 0; i < Room[No].size(); i++)
+				{
+					Room[No].at(i)->RoomIn(Room[No]);
+				}
+			}
+		}
 	}
 private:
 	std::vector<std::vector<RogueLikeMap>> mapArray;

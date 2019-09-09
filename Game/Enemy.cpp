@@ -45,15 +45,13 @@ Enemy::Enemy(int HP, int ATK, int DEF) :
 		5					//アニメーションクリップの数。
 	);
 
-	//サウンドエンジンを初期化。
-	m_soundEngine.Init();
-	//SE。
+	////SE。
 	m_AtkSE.Init(L"Assets/music/kick_middle.wav");
 
-	m_position.y = 50.0f;
+	m_position.y = masu;
 
 	//ポジション決め。
-	m_position = Game::GetGame().GetBackGround()->GetMapPosition(enemyMove.chatate, enemyMove.chayoko);
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition(enemyMove.chatate, enemyMove.chayoko,this);
 
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale);
 	
@@ -68,7 +66,9 @@ Enemy::~Enemy()
 void Enemy::Move()
 {		
 	if (Game::GetGame().GetPhase()->GetTaan() == Phase::enTaan) { 
-		FrameCounter++;
+		
+			FrameCounter++;
+		
 		if (FrameCounter > 0) {
 			//特殊処理(眠るや混乱など追加予定。)
 
@@ -142,8 +142,7 @@ void Enemy::Update()
 			deathF = false;
 		}
 		m_position.y = 50.0f;
-	//効果音の更新。
-	m_soundEngine.Update();
+	
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rotation, m_scale * 5.5);
 	//アニメーションの更新。

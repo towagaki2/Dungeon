@@ -13,6 +13,7 @@
 #include "Stairs.h"
 #include "sound/SoundEngine.h"
 #include "sound/SoundSource.h"
+#include "Item.h"
 
 class Player;
 class Phase;
@@ -24,6 +25,7 @@ class GameEnd;
 class UI;
 class RogueLikeMap;
 class Stairs;
+class Item;
 
 class Game
 {
@@ -76,6 +78,7 @@ class Game
 		{
 			return background;
 		}
+		
 
 		void EndAndStrat();			//終わりと始まり。
 
@@ -107,5 +110,7 @@ class Game
 		RogueLikeMap* rogueLikeMap;
 		//階段。
 		Stairs* stairs;
+		//アイテム。
+		Item* item;
 };
 

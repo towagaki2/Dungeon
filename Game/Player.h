@@ -20,15 +20,15 @@ public:
 	{
 
 	}
+	//プレイヤーのLVのゲッター。
+	int GetplLV()
+	{
+		return LV;
+	}
 	//プレイヤーのHPのゲッター。
 	int GetplHP()
 	{
 		return plHP;
-	}
-	//プレイヤーのHPのセッター。
-	void SetplHP(int plplHP)
-	{
-		plHP += plplHP;
 	}
 	//プレイヤーのDEFのゲッター。
 	int GetplDEF()
@@ -60,6 +60,11 @@ public:
 	{
 		return HUN;
 	}
+	//プレイヤーのHPのセッター。
+	void SetplHP(int plplHP)
+	{
+		plHP += plplHP;
+	}
 	//満腹度のセッター。
 	void SetHUN(int SetHun)
 	{
@@ -69,6 +74,11 @@ public:
 	void SetEXP(int SetExp)
 	{
 		EXP += SetExp;
+	}
+	//SEのセッター。
+	void SetSound()
+	{
+
 	}
 
 	int pltate = 0;
@@ -85,23 +95,19 @@ private:
 	int plMP = plMaxMP;		//現在のMP。
 	int iniATK = 10;		//初期攻撃力。
 	int plATK = iniATK;		//現在の攻撃力。
-	int iniDEF = 50;		//初期防御力。
+	int iniDEF = 5;			//初期防御力。
 	int plDEF = iniDEF;		//現在の防御力。
-	int HUN = 100000;		//満腹度。
-
+	int HUN = 100;			//満腹度。
 
 	void Move();			//移動処理。
 	void Turn();			//回転処理。　
 
 	bool moveF = false;			//移動フラグ。	
 	bool attackF = false;		//攻撃フラグ。
-	bool standF = false;			//待機フラグ。
+	bool standF = false;		//待機フラグ。
 	bool summaryF = false;		//フラグの総括。
-	bool RB1F = false;		//RB1押してるかのフラグ。
+	bool RB1F = false;			//RB1押してるかのフラグ。
 
-
-
-	CSoundEngine m_soundEngine;							//サウンドエンジン。
 	CSoundSource m_MoveSE;								//移動SE。
 	CSoundSource m_AtkSE;								//攻撃SE。
 	CSoundSource m_CureSE;								//回復SE。

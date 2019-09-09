@@ -128,6 +128,7 @@
     <ClCompile Include="HorrorMan.cpp" />
     <ClCompile Include="Stairs.cpp" />
     <ClCompile Include="CharaDeta.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -234,6 +235,7 @@
     <ClInclude Include="HorrorMan.h" />
     <ClInclude Include="Stairs.h" />
     <ClInclude Include="CharaDeta.h" />
+    <ClInclude Include="Item.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx">
@@ -250,5 +252,7 @@
     <MeshContentTask Include="Assets\modelData\yukaTail.fbx" />
     <MeshContentTask Include="Assets\modelData\kabe.fbx" />
     <MeshContentTask Include="Assets\modelData\Staire.fbx" />
+    <MeshContentTask Include="Assets\modelData\kaihukunotama.fbx" />
+    <MeshContentTask Include="Assets\modelData\Bread.fbx" />
   </ItemGroup>
 </Project>

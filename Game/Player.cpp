@@ -29,19 +29,20 @@ Player::Player()
 		3					//アニメーションクリップの数。
 	);
 	//サウンドエンジンを初期化。
-	m_soundEngine.Init();
+	//m_soundEngine.Init();
 	//SE。
 	m_AtkSE.Init(L"Assets/music/sword_gesture.wav");
 	m_MoveSE.Init(L"Assets/music/plmove.wav");
 	m_CureSE.Init(L"Assets/music/magic_status_cure.wav");
-	NewPos();
 
+
+	NewPos();
 }
 void Player::NewPos()
 {
-	m_position = Game::GetGame().GetBackGround()->GetMapPosition(pltate, plyoko);
+	m_position = Game::GetGame().GetBackGround()->GetMapPosition(pltate, plyoko,this);
 
-	m_position.y = 50.0f;
+	m_position.y = masu;
 }
 
 Player::~Player()
@@ -91,7 +92,7 @@ void Player::Move()
 		}
 		//進む方向が壁じゃないなら進む。
 		//壁なら移動せずターンは進まない。
-		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF,this))
+		if (!Game::GetGame().GetBackGround()->GetKabeOrYuka(pltate+ ZF,plyoko+XF,this)&& moveF==true)
 		{
 			pltate += ZF;
 			plyoko += XF;
@@ -172,6 +173,12 @@ void Player::Move()
 
 void Player::Turn()
 {
+	float angle = atan2(m_moveSpeed.x, m_moveSpeed.z);
+	m_rotation.SetRotation(CVector3::AxisY(), angle);
+	if (g_pad[0].IsPress(enButtonB) == true)
+	{
+		
+	}
 
 }
 void Player::Update()
@@ -181,7 +188,6 @@ void Player::Update()
 		//移動処理。
 		Move();
 		//効果音の更新。
-		m_soundEngine.Update();
 		//回転処理
 		Turn();
 		//アニメーションの更新。

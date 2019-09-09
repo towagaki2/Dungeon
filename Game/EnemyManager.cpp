@@ -45,52 +45,54 @@ void EnemyManager::Update()
 			enemy[i] = new HorrorMan(7, 7, 5);
 		}
 	}
-	
-	switch (syurui)
-	{
-	case kara:
-		for (int i = 0; i < teki; i++)
-		{
-			if (EnemyDeci[i] == 0)
-			{
-				std::random_device rnd;     // 非決定的な乱数生成器を生成
-				std::mt19937 Rand(rnd());   
-				std::uniform_int_distribution<> GetRand(1, 1);        // [0, 99] 範囲の一様乱数
-				ran = GetRand(Rand);
-				EnemyDeci[i] = ran;
-				m_number++;
-			}
-			if (EnemyDeci[i] == 1)
-			{
-				syurui = horrorman;
-			}
-		}
-		break;
-	case horrorman:
-		if (EnemyDeci[1] == 0)syurui = kara;
-		
-		break;
-	}
+
+	//switch (syurui)
+	//{
+	//case kara:
+	//	for (int i = 0; i < teki; i++)
+	//	{
+	//		if (EnemyDeci[i] == 0)
+	//		{
+	//			std::random_device rnd;     // 非決定的な乱数生成器を生成
+	//			std::mt19937 Rand(rnd());
+	//			std::uniform_int_distribution<> GetRand(1, 1);        // [0, 99] 範囲の一様乱数
+	//			ran = GetRand(Rand);
+	//			EnemyDeci[i] = ran;
+	//			m_number++;
+	//		}
+	//		if (EnemyDeci[i] == 1)
+	//		{
+	//		}
+	//	}
+	//	break;
+	//case horrorman:
+	//	if (EnemyDeci[1] == 0)syurui = kara;
+
+	//	break;
+	//}
 
 	for (int i = 0; i < teki; i++) {
-			if (enemy[i] != nullptr) {
-				if (enemy[i]->GetdeathF() == true)
-				{
-					Game::GetGame().GetPlayer()->SetEXP(2);
-					delete enemy[i];
-					enemy[i] = nullptr;
-					EnemyDeci[i] = 0;
-					syurui = kara;
-				}
+		if (enemy[i] != nullptr) {
+			if (enemy[i]->GetdeathF() == true)
+			{
+				Game::GetGame().GetPlayer()->SetEXP(2);
+				delete enemy[i];
+				enemy[i] = nullptr;
+				EnemyDeci[i] = 0;
+				syurui = kara;
 			}
 		}
+	}
+
+	syurui = horrorman;
 }
 
 void EnemyManager::Draw()
 {
-	for(int i = 0; i < teki; i++)
-	//エネミーの描画。
-	if (enemy[i] != nullptr) {
-		enemy[i]->Draw();
+	for (int i = 0; i < teki; i++) {
+		//エネミーの描画。
+		if (enemy[i] != nullptr) {
+			enemy[i]->Draw();
+		}
 	}
 }

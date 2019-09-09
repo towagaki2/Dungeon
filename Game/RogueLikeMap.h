@@ -15,7 +15,7 @@ public:
 	//書き換え可能なマップ
 	size_t mapData = 1;
 	size_t size = 1;
-	size_t roomNo= 1;
+	size_t roomNo= 0;
 
 };
 
@@ -155,7 +155,7 @@ int rogueLikeMapMake(DungeonMap_RL* const dng, T& maprl)
 		for (size_t j = dng->mapRoom[i][2]; j < dng->mapRoom[i][0]; ++j)
 			for (size_t k = dng->mapRoom[i][3]; k < dng->mapRoom[i][1]; ++k) {
 				maprl[j][k].mapData = 0;
-				maprl[j][k].roomNo = i;
+				maprl[j][k].roomNo = i+1;
 			}
 
 	}
