@@ -35,7 +35,6 @@ public:
 
 						break;
 					}
-
 				}
 			}
 		}
@@ -60,11 +59,8 @@ public:
 
 						break;
 					}
-
 				}
-
 			}
-
 		}
 		return m_position[0][0];
 	}
@@ -91,7 +87,6 @@ public:
 				auto no = ((CharaDeta*)point)->RoomNo;
 				if (no >= 0) {
 					Room[no].erase(std::remove(Room[no].begin(), Room[no].end(), (CharaDeta*)point), Room[no].end());
-
 				}
 				((CharaDeta*)point)->RoomNo = -1;
 			}
